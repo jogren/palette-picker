@@ -9,7 +9,7 @@ const CurrentColors = ({colors}) => {
     return <Color style={style} key={color}/>
   })
   return (
-    <section>
+    <section className="current-colors">
       {currentColors}
     </section>
   )

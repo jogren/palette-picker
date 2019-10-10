@@ -2,7 +2,7 @@ import React from 'react';
 
 const Color = ({style}) => {
   return (
-    <article style={style}>
+    <article className="color" style={style}>
       <button>lock</button>
     </article>
   )

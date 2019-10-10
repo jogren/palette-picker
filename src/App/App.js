@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../Header/Header';
 import CurrentColors from '../CurrentColors/CurrentColors';
-var randomColor = require('randomcolor');
+import CreatePaletteForm from '../CreatePaletteForm/CreatePaletteForm';
+let randomColor = require('randomcolor');
 
 class App extends Component {
   constructor() {
@@ -23,6 +24,7 @@ class App extends Component {
       <main className="App">
         <Header />
         <CurrentColors colors={this.state.colors}/>
+        <CreatePaletteForm />
       </main>
     );
   }
