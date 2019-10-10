@@ -11,17 +11,35 @@ let randomColor = require('randomcolor');
 
 export class App extends Component {
 
-  componentDidMount() {
+  componentDidMount = () => {
     let colors = randomColor({
-      count: 5    
+      count: 5
     });
-    this.props.setCurrentPalette(colors)
+
+    let structuredColors = colors.map(color => {
+      return { hexCode: color, isLocked: false }
+    })
+    console.log(structuredColors)
+    this.props.setCurrentPalette(structuredColors)
+  }
+  
+  generateRandomColors = () => {
+    const { setCurrentPalette, currentPalette } = this.props;
+    let updatedColors = currentPalette.map(color => {
+      if(color.isLocked) {
+        return color
+      } else {
+        return { hexCode: randomColor(), isLocked: false };
+      }
+    })
+
+    setCurrentPalette(updatedColors)
   }
 
   render() {
     return (
       <main className="App">
-        <Header />
+        <Header generateColors={this.generateRandomColors}/>
         <CurrentColors />
         <CreatePaletteForm />
         <ProjectsContainer />
@@ -31,8 +49,12 @@ export class App extends Component {
   }
 }
 
+const mapStateToProps = ({ currentPalette }) => ({
+  currentPalette
+})
+
 const mapDispatchToProps = dispatch => (
   bindActionCreators({ setCurrentPalette }, dispatch)
 )
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
