@@ -1,8 +1,11 @@
 import React from 'react';
 import Color from '../Color/Color';
+import { connect } from 'react-redux';
+import { currentPalette } from '../reducers/currentPalette';
 
-const CurrentColors = ({colors}) => {
-  let currentColors = colors.map(color => {
+
+const CurrentColors = ({ currentPalette }) => {
+  let currentColors = currentPalette.map(color => {
     const style = {
       backgroundColor: color
     }
@@ -15,4 +18,8 @@ const CurrentColors = ({colors}) => {
   )
 }
 
-export default CurrentColors;
+const mapStateToProps = state => ({
+  currentPalette: state.currentPalette
+})
+
+export default connect(mapStateToProps)(CurrentColors);

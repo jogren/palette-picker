@@ -4,28 +4,25 @@ import CurrentColors from '../CurrentColors/CurrentColors';
 import CreatePaletteForm from '../CreatePaletteForm/CreatePaletteForm';
 import ProjectsContainer from '../ProjectsContainer/ProjectsContainer';
 import SelectedPalettesContainer from '../SelectedPalettesContainer/SelectedPalettesContainer';
+import { setCurrentPalette } from '../actions';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 let randomColor = require('randomcolor');
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      colors: []
-    }
-  }
+export class App extends Component {
 
   componentDidMount() {
     let colors = randomColor({
       count: 5    
     });
-    this.setState({colors})
+    this.props.setCurrentPalette(colors)
   }
 
   render() {
     return (
       <main className="App">
         <Header />
-        <CurrentColors colors={this.state.colors}/>
+        <CurrentColors />
         <CreatePaletteForm />
         <ProjectsContainer />
         <SelectedPalettesContainer />
@@ -34,4 +31,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({ setCurrentPalette }, dispatch)
+)
+
+export default connect(null, mapDispatchToProps)(App);
