@@ -12,25 +12,18 @@ let randomColor = require('randomcolor');
 export class App extends Component {
 
   componentDidMount = () => {
-    let colors = randomColor({
-      count: 5
-    });
+    let colors = randomColor({ count: 5 });
 
     let structuredColors = colors.map(color => {
       return { hexCode: color, isLocked: false }
     })
-    console.log(structuredColors)
     this.props.setCurrentPalette(structuredColors)
   }
   
   generateRandomColors = () => {
     const { setCurrentPalette, currentPalette } = this.props;
     let updatedColors = currentPalette.map(color => {
-      if(color.isLocked) {
-        return color
-      } else {
-        return { hexCode: randomColor(), isLocked: false };
-      }
+      return color.isLocked ? color : { hexCode: randomColor(), isLocked: false }
     })
     setCurrentPalette(updatedColors)
   }
@@ -53,8 +46,10 @@ export class App extends Component {
         <Header generateColors={this.generateRandomColors}/>
         <CurrentColors toggleLock={this.toggleLock}/>
         <CreatePaletteForm />
-        <ProjectsContainer />
-        <SelectedPalettesContainer />
+        <section className="App_projects-section">
+          <ProjectsContainer />
+          <SelectedPalettesContainer />
+        </section>
       </main>
     );
   }

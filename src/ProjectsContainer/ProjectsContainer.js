@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { postNewProject } from '../util/apiCalls';
 
 class ProjectsContainer extends Component {
   constructor() {
@@ -12,6 +13,15 @@ class ProjectsContainer extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  handleSubmit = (e) => {
+    const { name } = this.state;
+    e.preventDefault();
+    postNewProject(name);
+    
+    this.setState({ name: "" });
+
+  }
+
   render() {
     return (
       <section>
@@ -22,7 +32,7 @@ class ProjectsContainer extends Component {
             name="name"
             value={this.state.name}
             onChange={this.handleChange} />
-          <button>Submit Project Name</button>
+          <button onClick={this.handleSubmit}>Submit Project Name</button>
         </form>
         <div>
           <p>Project 1</p>
