@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Header = () => {
+const Header = ({ generateColors }) => {
   return (
     <header>
       <h1>Palette Picker</h1>
-      <button>Generate New Palette</button>
+      <button onClick={generateColors}>Generate New Palette</button>
     </header>
   )
 }
