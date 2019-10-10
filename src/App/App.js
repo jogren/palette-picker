@@ -32,15 +32,26 @@ export class App extends Component {
         return { hexCode: randomColor(), isLocked: false };
       }
     })
-
     setCurrentPalette(updatedColors)
   }
 
+  toggleLock = (toggleColor) => {
+    const { currentPalette, setCurrentPalette } = this.props;
+    let updatedPalette = currentPalette.map(color => {
+      if (color.hexCode === toggleColor) {
+        return { hexCode: color.hexCode, isLocked: !color.isLocked }
+      } else {
+        return color
+      }
+    })
+    setCurrentPalette(updatedPalette)
+  }
+  
   render() {
     return (
       <main className="App">
         <Header generateColors={this.generateRandomColors}/>
-        <CurrentColors />
+        <CurrentColors toggleLock={this.toggleLock}/>
         <CreatePaletteForm />
         <ProjectsContainer />
         <SelectedPalettesContainer />
