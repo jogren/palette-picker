@@ -17,7 +17,7 @@ class ProjectsContainer extends Component {
     const { name } = this.state;
     e.preventDefault();
     postNewProject(name);
-    
+
     this.setState({ name: "" });
 
   }

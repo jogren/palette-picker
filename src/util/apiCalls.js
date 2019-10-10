@@ -1,3 +1,15 @@
+export const getAllProjects = async () => {
+  const url = 'https://palette-picker-api-sfjo.herokuapp.com/api/v1/projects';
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw Error('There was an issue getting your projects');
+  }
+
+  const projects = await response.json();
+  console.log(projects);
+  return projects;
+}
+
 export const postNewProject = async (name) => {
   const url = 'https://palette-picker-api-sfjo.herokuapp.com/api/v1/projects';
   let options = {
@@ -14,6 +26,5 @@ export const postNewProject = async (name) => {
   }
 
   const project = await response.json();
-  console.log(project);
   return project;
 }
