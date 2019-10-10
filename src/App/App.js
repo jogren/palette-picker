@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 import CurrentColors from '../CurrentColors/CurrentColors';
 import CreatePaletteForm from '../CreatePaletteForm/CreatePaletteForm';
 import ProjectsContainer from '../ProjectsContainer/ProjectsContainer';
+import SelectedPalettesContainer from '../SelectedPalettesContainer/SelectedPalettesContainer';
 let randomColor = require('randomcolor');
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
         <CurrentColors colors={this.state.colors}/>
         <CreatePaletteForm />
         <ProjectsContainer />
+        <SelectedPalettesContainer />
       </main>
     );
   }
