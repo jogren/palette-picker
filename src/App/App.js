@@ -4,20 +4,25 @@ import CurrentColors from '../CurrentColors/CurrentColors';
 import CreatePaletteForm from '../CreatePaletteForm/CreatePaletteForm';
 import ProjectsContainer from '../ProjectsContainer/ProjectsContainer';
 import SelectedPalettesContainer from '../SelectedPalettesContainer/SelectedPalettesContainer';
-import { setCurrentPalette } from '../actions';
+import { setCurrentPalette, setCurrentProjects } from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { getAllProjects } from '../util/apiCalls';
 let randomColor = require('randomcolor');
 
 export class App extends Component {
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
+    const { setCurrentPalette, setCurrentProjects } = this.props;
     let colors = randomColor({ count: 5 });
 
     let structuredColors = colors.map(color => {
       return { hexCode: color, isLocked: false }
     })
-    this.props.setCurrentPalette(structuredColors)
+    setCurrentPalette(structuredColors)
+    const projects = await getAllProjects();
+    console.log(projects)
+    setCurrentProjects(projects)
   }
   
   generateRandomColors = () => {
@@ -60,7 +65,7 @@ const mapStateToProps = ({ currentPalette }) => ({
 })
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ setCurrentPalette }, dispatch)
+  bindActionCreators({ setCurrentPalette, setCurrentProjects }, dispatch)
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

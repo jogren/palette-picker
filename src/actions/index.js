@@ -3,3 +3,7 @@ export const setCurrentPalette = (colors) => ({
   colors
 });
 
+export const setCurrentProjects = (projects) => ({
+  type: 'SET_PROJECTS',
+  projects
+});
