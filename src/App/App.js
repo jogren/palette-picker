@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../Header/Header';
 import CurrentColors from '../CurrentColors/CurrentColors';
 import CreatePaletteForm from '../CreatePaletteForm/CreatePaletteForm';
+import ProjectsContainer from '../ProjectsContainer/ProjectsContainer';
 let randomColor = require('randomcolor');
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
         <Header />
         <CurrentColors colors={this.state.colors}/>
         <CreatePaletteForm />
+        <ProjectsContainer />
       </main>
     );
   }
