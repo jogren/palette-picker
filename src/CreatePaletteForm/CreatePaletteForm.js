@@ -39,7 +39,7 @@ class CreatePaletteForm extends Component {
   render() {
     const { currentProjects } = this.props;
     let displayProjects = currentProjects.map(project => {
-      return <option value={project.name}>{project.name}</option>
+      return <option key={project.name} value={project.name}>{project.name}</option>
     })
     return (
       <form>

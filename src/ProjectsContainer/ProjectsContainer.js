@@ -31,7 +31,7 @@ class ProjectsContainer extends Component {
   render() {
     const { currentProjects } = this.props;
     let projectList = currentProjects.map(project => {
-      return <button>{project.name}</button>
+      return <button key={project.name}>{project.name}</button>
     })
     return (
       <section>
