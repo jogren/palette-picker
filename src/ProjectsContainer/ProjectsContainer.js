@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { postNewProject } from '../util/apiCalls';
+import { connect } from 'react-redux';
 
 class ProjectsContainer extends Component {
   constructor() {
@@ -23,6 +24,10 @@ class ProjectsContainer extends Component {
   }
 
   render() {
+    const { currentProjects } = this.props;
+    let projectList = currentProjects.map(project => {
+      return <p>{project.name}</p>
+    })
     return (
       <section>
         <form>
@@ -35,11 +40,15 @@ class ProjectsContainer extends Component {
           <button onClick={this.handleSubmit}>Submit Project Name</button>
         </form>
         <div>
-          <p>Project 1</p>
+          {projectList}
         </div>
       </section>
     )
   }
 }
 
-export default ProjectsContainer;
+const mapStateToProps = ({ currentProjects }) => ({
+  currentProjects
+})
+
+export default connect(mapStateToProps)(ProjectsContainer);
