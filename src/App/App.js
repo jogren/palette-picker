@@ -21,7 +21,6 @@ export class App extends Component {
     })
     setCurrentPalette(structuredColors)
     const projects = await getAllProjects();
-    console.log(projects)
     setCurrentProjects(projects)
   }
   
