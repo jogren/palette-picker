@@ -27,3 +27,22 @@ export const postNewProject = async (name) => {
   const project = await response.json();
   return project;
 }
+
+export const postNewPalette = async (paletteObj) => {
+  const url = 'https://palette-picker-api-sfjo.herokuapp.com/api/v1/palettes';
+  let options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ paletteObj })
+  }
+
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw Error('There was an issue posting your palette');
+  }
+
+  const paletteId = await response.json();
+  return paletteId;
+}
