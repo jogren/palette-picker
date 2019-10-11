@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { postNewPalette } from '../util/apiCalls';
 
 class CreatePaletteForm extends Component {
   constructor() {
     super();
     this.state = {
-      name: ""
+      name: "",
+      currentProject: ""
     }
   }
 
@@ -13,9 +15,25 @@ class CreatePaletteForm extends Component {
     this.setState({[e.target.name]: e.target.value});
   }
 
+  handleCurrentProject = (target) => {
+    this.setState({currentProject: target})
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
-    
+    const { currentProjects, currentPalette} = this.props;
+    const { name, currentProject } = this.state;
+    const projectId = currentProjects.find(project => project.name === currentProject).id;
+    const postPalette = {
+      name: name,
+      project_id: projectId,
+      color1: currentPalette[0].hexCode,
+      color2: currentPalette[1].hexCode,
+      color3: currentPalette[2].hexCode,
+      color4: currentPalette[3].hexCode,
+      color5: currentPalette[4].hexCode,
+    }
+    postNewPalette(postPalette);
   }
 
   render() {
@@ -25,8 +43,8 @@ class CreatePaletteForm extends Component {
     })
     return (
       <form>
-        <select>
-          <option>Pick Project</option>
+        <select onChange={(e) => this.handleCurrentProject(e.target.value)} >
+          <option value="">Pick Project</option>
           {displayProjects}
         </select>
         <input
@@ -41,8 +59,9 @@ class CreatePaletteForm extends Component {
   }
 }
 
-const mapStateToProps = ({ currentProjects }) => ({
-  currentProjects
+const mapStateToProps = ({ currentProjects, currentPalette }) => ({
+  currentProjects,
+  currentPalette
 })
 
 export default connect(mapStateToProps)(CreatePaletteForm);
