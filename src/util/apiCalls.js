@@ -35,7 +35,7 @@ export const postNewPalette = async (paletteObj) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ paletteObj })
+    body: JSON.stringify(paletteObj)
   }
 
   const response = await fetch(url, options);
