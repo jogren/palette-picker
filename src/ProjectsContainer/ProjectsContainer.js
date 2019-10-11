@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { postNewProject } from '../util/apiCalls';
+import { postNewProject, getAllProjects } from '../util/apiCalls';
+import { setCurrentProjects } from '../actions';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 class ProjectsContainer extends Component {
   constructor() {
@@ -14,11 +16,14 @@ class ProjectsContainer extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     const { name } = this.state;
+    const { setCurrentProjects } = this.props;
     e.preventDefault();
-    postNewProject(name);
-
+    await postNewProject(name);
+    const projects = await getAllProjects();
+    console.log(projects)
+    setCurrentProjects(projects)
     this.setState({ name: "" });
 
   }
@@ -26,7 +31,7 @@ class ProjectsContainer extends Component {
   render() {
     const { currentProjects } = this.props;
     let projectList = currentProjects.map(project => {
-      return <p>{project.name}</p>
+      return <button>{project.name}</button>
     })
     return (
       <section>
@@ -39,7 +44,7 @@ class ProjectsContainer extends Component {
             onChange={this.handleChange} />
           <button onClick={this.handleSubmit}>Submit Project Name</button>
         </form>
-        <div>
+        <div className="div_project-name-container">
           {projectList}
         </div>
       </section>
@@ -51,4 +56,7 @@ const mapStateToProps = ({ currentProjects }) => ({
   currentProjects
 })
 
-export default connect(mapStateToProps)(ProjectsContainer);
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({ setCurrentProjects }, dispatch)
+)
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);
