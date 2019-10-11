@@ -6,7 +6,6 @@ export const getAllProjects = async () => {
   }
 
   const projects = await response.json();
-  console.log(projects);
   return projects;
 }
 
