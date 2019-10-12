@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { postNewProject, getAllProjects } from '../util/apiCalls';
-import { setCurrentProjects } from '../actions';
+import { postNewProject, getAllProjects, getSelectedPalettes } from '../util/apiCalls';
+import { setCurrentProjects, setSelectedPalettes } from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -25,13 +25,20 @@ class ProjectsContainer extends Component {
     console.log(projects)
     setCurrentProjects(projects)
     this.setState({ name: "" });
-
   }
+
+  handleProjectSelect = async (id) => {
+    console.log(id)
+    const palettes = await getSelectedPalettes(id);
+    console.log(palettes)
+    this.props.setSelectedPalettes(palettes)
+  }
+
 
   render() {
     const { currentProjects } = this.props;
     let projectList = currentProjects.map(project => {
-      return <button key={project.name}>{project.name}</button>
+      return <button key={project.name} onClick={() => this.handleProjectSelect(project.id)}>{project.name}</button>
     })
     return (
       <section>
@@ -57,6 +64,6 @@ const mapStateToProps = ({ currentProjects }) => ({
 })
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ setCurrentProjects }, dispatch)
+  bindActionCreators({ setCurrentProjects, setSelectedPalettes }, dispatch)
 )
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);

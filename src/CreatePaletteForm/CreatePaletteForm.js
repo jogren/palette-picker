@@ -31,7 +31,7 @@ class CreatePaletteForm extends Component {
       color2: currentPalette[1].hexCode,
       color3: currentPalette[2].hexCode,
       color4: currentPalette[3].hexCode,
-      color5: currentPalette[4].hexCode,
+      color5: currentPalette[4].hexCode
     }
     postNewPalette(postPalette);
   }
