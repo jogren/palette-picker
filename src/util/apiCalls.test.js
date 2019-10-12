@@ -1,4 +1,4 @@
-import { getAllProjects, getSelectedPalettes, postNewProject } from './apiCalls';
+import { getAllProjects, getSelectedPalettes, postNewProject, postNewPalette } from './apiCalls';
 
 describe('getAllProjects', () => {
   let mockProjects;
@@ -176,5 +176,66 @@ describe('postNewProject', () => {
       })
 
     expect(postNewProject(mockName)).rejects.toEqual(Error('Failed to post project'))
+  });
+});
+
+describe('postNewPalette', () => {
+  let mockPalette;
+  let options;
+
+  beforeEach(() => {
+    mockPalette = {
+      name: 'mint',
+      project_id: 4,
+      color1: '#98ff98',
+      color2: '#98ff98',
+      color3: '#98ff98',
+      color4: '#98ff98',
+      color5: '#98ff98'
+    }
+    options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(mockPalette)
+    }
+
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(mockPalette)
+      })
+    })
+  });
+
+  it('should call fetch with the correct url', () => {
+    postNewPalette(mockPalette);
+
+    expect(window.fetch).toHaveBeenCalledWith('https://palette-picker-api-sfjo.herokuapp.com/api/v1/palettes', options);
+  });
+
+  it('should return a new response project', () => {
+    expect(postNewPalette(mockPalette)).resolves.toEqual(mockPalette);
+  });
+
+  it('should return an error if the promise resolves but the property ok isn\'t true', () => {
+    window.fetch = jest.fn()
+      .mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        })
+      })
+
+    expect(postNewPalette(mockPalette)).rejects.toEqual(Error('There was an issue posting your palette'))
+  });
+
+  it('should return an error if the promise rejects', () => {
+    window.fetch = jest.fn()
+      .mockImplementation(() => {
+        return Promise.reject(Error('Failed to post palette'))
+      })
+
+    expect(postNewPalette(mockPalette)).rejects.toEqual(Error('Failed to post palette'))
   });
 });
