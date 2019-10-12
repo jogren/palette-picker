@@ -7,12 +7,12 @@ const SelectedPalettesContainer = ({ selectedPalettes }) => {
     if (selectedPalettes[0].name) {
       return <div className="selected-palette" key={palette.name}>
         <p>{palette.name}</p>
-        <section className="selectedPalettes-color-container">
-          <div  className="color-container-start" style={{ backgroundColor: palette.color1 }}></div>
+        <section className="color-container">
+          <div style={{ backgroundColor: palette.color1 }}></div>
           <div style={{ backgroundColor: palette.color2 }}></div>
           <div style={{ backgroundColor: palette.color3 }}></div>
           <div style={{ backgroundColor: palette.color4 }}></div>
-          <div className="color-container-end" style={{ backgroundColor: palette.color5 }}></div>
+          <div style={{ backgroundColor: palette.color5 }}></div>
         </section>
       </div>
     } else {

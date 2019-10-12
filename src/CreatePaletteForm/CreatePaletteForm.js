@@ -42,19 +42,24 @@ class CreatePaletteForm extends Component {
       return <option key={project.name} value={project.name}>{project.name}</option>
     })
     return (
-      <form>
-        <select onChange={(e) => this.handleCurrentProject(e.target.value)} >
-          <option value="">Pick Project</option>
-          {displayProjects}
-        </select>
-        <input
-          type="text"
-          placeholder="Palette Name"
-          name="name"
-          value={this.state.name}
-          onChange={this.handleChange} />
-        <button onClick={this.handleSubmit}>Save Palette</button>
-      </form>
+      <section className="CreatePalette_section">
+        <div>
+          <button>Save Changes</button>
+        </div>
+        <form className="CreatePalette_form">
+          <select onChange={(e) => this.handleCurrentProject(e.target.value)} >
+            <option value="">Pick Project</option>
+            {displayProjects}
+          </select>
+          <input
+            type="text"
+            placeholder="Palette Name"
+            name="name"
+            value={this.state.name}
+            onChange={this.handleChange} />
+          <button onClick={this.handleSubmit}>Save Palette</button>
+        </form>
+      </section>
     )
   }
 }

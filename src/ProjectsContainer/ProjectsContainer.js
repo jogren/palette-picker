@@ -38,7 +38,7 @@ class ProjectsContainer extends Component {
       return <button key={project.name} onClick={() => this.handleProjectSelect(project.id)}>{project.name}</button>
     })
     return (
-      <section>
+      <section className="ProjectsContainer_section">
         <form>
           <input 
             type="text"
