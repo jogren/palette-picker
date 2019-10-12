@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { postNewPalette } from '../util/apiCalls';
+import { postNewPalette, getSelectedPalettes } from '../util/apiCalls';
+import { setSelectedPalettes } from '../actions';
+import { bindActionCreators } from 'redux';
 
 export class CreatePaletteForm extends Component {
   constructor() {
@@ -19,7 +21,7 @@ export class CreatePaletteForm extends Component {
     this.setState({currentProject: target})
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const { currentProjects, currentPalette} = this.props;
     const { name, currentProject } = this.state;
@@ -33,7 +35,10 @@ export class CreatePaletteForm extends Component {
       color4: currentPalette[3].hexCode,
       color5: currentPalette[4].hexCode
     }
-    postNewPalette(postPalette);
+    await postNewPalette(postPalette);
+    const updatePalettes = await getSelectedPalettes(projectId);
+    this.props.setSelectedPalettes(updatePalettes)
+    this.setState({ name: "" })
   }
 
   render() {
@@ -42,19 +47,24 @@ export class CreatePaletteForm extends Component {
       return <option key={project.name} value={project.name}>{project.name}</option>
     })
     return (
-      <form>
-        <select onChange={(e) => this.handleCurrentProject(e.target.value)} >
-          <option value="">Pick Project</option>
-          {displayProjects}
-        </select>
-        <input
-          type="text"
-          placeholder="Palette Name"
-          name="name"
-          value={this.state.name}
-          onChange={this.handleChange} />
-        <button onClick={this.handleSubmit}>Save Palette</button>
-      </form>
+      <section className="CreatePalette_section">
+        <div>
+          <button>Save Changes</button>
+        </div>
+        <form className="CreatePalette_form">
+          <select onChange={(e) => this.handleCurrentProject(e.target.value)} >
+            <option value="">Pick Project</option>
+            {displayProjects}
+          </select>
+          <input
+            type="text"
+            placeholder="Palette Name"
+            name="name"
+            value={this.state.name}
+            onChange={this.handleChange} />
+          <button onClick={this.handleSubmit}>Save Palette</button>
+        </form>
+      </section>
     )
   }
 }
@@ -62,6 +72,10 @@ export class CreatePaletteForm extends Component {
 const mapStateToProps = ({ currentProjects, currentPalette }) => ({
   currentProjects,
   currentPalette
-})
+});
 
-export default connect(mapStateToProps)(CreatePaletteForm);
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({ setSelectedPalettes }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePaletteForm);

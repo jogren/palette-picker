@@ -1,0 +1,27 @@
+.selectedPalettes_section {
+  width: 100%;
+}
+
+.selected-palette header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.img_color-container {
+  height: 20px;
+}
+
+.selectedPalettes_section section {
+  display: flex;
+}
+
+.color-container div {
+  width: 20%;
+  height: 40px;
+}
+
+.color-container:hover {
+  transition: all .2s ease-in-out;
+  transform: scale(1.02);
+}

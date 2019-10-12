@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 export const CurrentColors = ({ currentPalette, toggleLock }) => {
   let currentColors = currentPalette.map(color => {
     const colorStyle = { backgroundColor: color.hexCode };
-    return <Color color={colorStyle} toggleLock={toggleLock} key={color.hexCode} />
+    return <Color color={colorStyle} isLocked={color.isLocked} toggleLock={toggleLock} key={color.hexCode} />
   })
 
   return (

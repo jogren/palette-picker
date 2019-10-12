@@ -4,10 +4,10 @@ import CurrentColors from '../CurrentColors/CurrentColors';
 import CreatePaletteForm from '../CreatePaletteForm/CreatePaletteForm';
 import ProjectsContainer from '../ProjectsContainer/ProjectsContainer';
 import SelectedPalettesContainer from '../SelectedPalettesContainer/SelectedPalettesContainer';
-import { setCurrentPalette, setCurrentProjects } from '../actions';
+import { setCurrentPalette, setCurrentProjects, setSelectedPalettes } from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getAllProjects } from '../util/apiCalls';
+import { getAllProjects, deletePaletteFromDB, getSelectedPalettes } from '../util/apiCalls';
 let randomColor = require('randomcolor');
 
 export class App extends Component {
@@ -43,6 +43,13 @@ export class App extends Component {
     })
     setCurrentPalette(updatedPalette)
   }
+
+  deletePalette = async (paletteId, projectId) => {
+    await deletePaletteFromDB(paletteId)
+    const updatePalettes = await getSelectedPalettes(projectId);
+    this.props.setSelectedPalettes(updatePalettes)
+
+  }
   
   render() {
     return (
@@ -52,7 +59,7 @@ export class App extends Component {
         <CreatePaletteForm />
         <section className="App_projects-section">
           <ProjectsContainer />
-          <SelectedPalettesContainer />
+          <SelectedPalettesContainer deletePalette={this.deletePalette}/>
         </section>
       </main>
     );
@@ -64,7 +71,7 @@ const mapStateToProps = ({ currentPalette }) => ({
 })
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ setCurrentPalette, setCurrentProjects }, dispatch)
+  bindActionCreators({ setCurrentPalette, setCurrentProjects, setSelectedPalettes }, dispatch)
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
