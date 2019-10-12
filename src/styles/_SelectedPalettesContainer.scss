@@ -10,8 +10,12 @@
   display: flex;
 }
 
-.selectedPalettes-color-container div {
+.color-container div {
   width: 20%;
   height: 40px;
-  transform: skew(-20deg);  
+}
+
+.color-container:hover {
+  transition: all .2s ease-in-out;
+  transform: scale(1.02);
 }
