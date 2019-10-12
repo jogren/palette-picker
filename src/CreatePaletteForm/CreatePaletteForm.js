@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { postNewPalette } from '../util/apiCalls';
 
-class CreatePaletteForm extends Component {
+export class CreatePaletteForm extends Component {
   constructor() {
     super();
     this.state = {
