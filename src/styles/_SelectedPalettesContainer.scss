@@ -2,8 +2,14 @@
   width: 100%;
 }
 
-.selected-palette p {
-  text-align: center;
+.selected-palette header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.img_color-container {
+  height: 20px;
 }
 
 .selectedPalettes_section section {
