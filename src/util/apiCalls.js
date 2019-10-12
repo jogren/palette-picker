@@ -59,3 +59,22 @@ export const postNewPalette = async (paletteObj) => {
   const paletteId = await response.json();
   return paletteId;
 }
+
+export const deletePaletteFromDB = async (id) => {
+  const url = `https://palette-picker-api-sfjo.herokuapp.com/api/v1/palettes/${id}`;
+  try {
+    const options = {
+      method: "DELETE",
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    const response = await fetch(url, options)
+    if (!response.ok) {
+      throw new Error('There was an error deleting that palette');
+    }
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
