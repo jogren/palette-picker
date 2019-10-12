@@ -1,4 +1,4 @@
-import { getAllProjects, getSelectedPalettes } from './apiCalls';
+import { getAllProjects, getSelectedPalettes, postNewProject } from './apiCalls';
 
 describe('getAllProjects', () => {
   let mockProjects;
@@ -119,5 +119,62 @@ describe('getSelectedPalettes', () => {
       })
 
     expect(getSelectedPalettes(mockId)).rejects.toEqual(Error('Failed to fetch palettes'))
+  });
+});
+
+describe('postNewProject', () => {
+  let mockProject;
+  let mockName;
+  let options;
+
+  beforeEach(() => {
+    mockName = 'Winter';
+    mockProject = {
+      name: 'Winter'
+    }
+    options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name: mockName })
+    }
+
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(mockProject)
+      })
+    })
+  });
+
+  it('should call fetch with the correct url', () => {
+    postNewProject(mockName);
+
+    expect(window.fetch).toHaveBeenCalledWith('https://palette-picker-api-sfjo.herokuapp.com/api/v1/projects', options);
+  });
+
+  it('should return a new response project', () => {
+    expect(postNewProject(mockName)).resolves.toEqual(mockProject);
+  });
+
+  it('should return an error if the promise resolves but the property ok isn\'t true', () => {
+    window.fetch = jest.fn()
+      .mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        })
+      })
+
+    expect(postNewProject(mockName)).rejects.toEqual(Error('There was an issue posting your project'))
+  });
+
+  it('should return an error if the promise rejects', () => {
+    window.fetch = jest.fn()
+      .mockImplementation(() => {
+        return Promise.reject(Error('Failed to post project'))
+      })
+
+    expect(postNewProject(mockName)).rejects.toEqual(Error('Failed to post project'))
   });
 });
