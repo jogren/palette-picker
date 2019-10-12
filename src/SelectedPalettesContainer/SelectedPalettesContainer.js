@@ -6,7 +6,6 @@ import deleteIcon from '../images/delete.png';
 const SelectedPalettesContainer = ({ selectedPalettes, deletePalette }) => {
 
   let selectedPalettesDisplay = selectedPalettes.map(palette => {
-    console.log(palette)
     if (selectedPalettes[0].name) {
       return <div className="selected-palette" key={palette.name}>
         <header>

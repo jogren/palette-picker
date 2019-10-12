@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { postNewPalette } from '../util/apiCalls';
+import { postNewPalette, getSelectedPalettes } from '../util/apiCalls';
+import { setSelectedPalettes } from '../actions';
+import { bindActionCreators } from 'redux';
 
 class CreatePaletteForm extends Component {
   constructor() {
@@ -19,7 +21,7 @@ class CreatePaletteForm extends Component {
     this.setState({currentProject: target})
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const { currentProjects, currentPalette} = this.props;
     const { name, currentProject } = this.state;
@@ -33,7 +35,11 @@ class CreatePaletteForm extends Component {
       color4: currentPalette[3].hexCode,
       color5: currentPalette[4].hexCode
     }
-    postNewPalette(postPalette);
+    await postNewPalette(postPalette);
+    const updatePalettes = await getSelectedPalettes(projectId);
+    console.log(updatePalettes)
+    this.props.setSelectedPalettes(updatePalettes)
+    this.setState({ name: "" })
   }
 
   render() {
@@ -67,6 +73,10 @@ class CreatePaletteForm extends Component {
 const mapStateToProps = ({ currentProjects, currentPalette }) => ({
   currentProjects,
   currentPalette
-})
+});
 
-export default connect(mapStateToProps)(CreatePaletteForm);
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({ setSelectedPalettes }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePaletteForm);
