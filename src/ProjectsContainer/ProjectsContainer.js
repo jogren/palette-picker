@@ -22,15 +22,12 @@ class ProjectsContainer extends Component {
     e.preventDefault();
     await postNewProject(name);
     const projects = await getAllProjects();
-    console.log(projects)
     setCurrentProjects(projects)
     this.setState({ name: "" });
   }
 
   handleProjectSelect = async (id) => {
-    console.log(id)
     const palettes = await getSelectedPalettes(id);
-    console.log(palettes)
     this.props.setSelectedPalettes(palettes)
   }
 
