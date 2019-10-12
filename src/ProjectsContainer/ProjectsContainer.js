@@ -4,7 +4,7 @@ import { setCurrentProjects, setSelectedPalettes } from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-class ProjectsContainer extends Component {
+export class ProjectsContainer extends Component {
   constructor() {
     super();
     this.state = {
