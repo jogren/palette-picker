@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectsContainer should match the snapshot with the data passed through 1`] = `
+<section>
+  <form>
+    <input
+      name="name"
+      onChange={[Function]}
+      placeholder="New Project's Name"
+      type="text"
+      value=""
+    />
+    <button
+      onClick={[Function]}
+    >
+      Submit Project Name
+    </button>
+  </form>
+  <div
+    className="div_project-name-container"
+  >
+    <button
+      key="Winter"
+      onClick={[Function]}
+    >
+      Winter
+    </button>
+  </div>
+</section>
+`;
