@@ -45,8 +45,6 @@ export class App extends Component {
   }
 
   deletePalette = async (paletteId, projectId) => {
-    console.log(paletteId)
-    console.log(projectId)
     await deletePaletteFromDB(paletteId)
     const updatePalettes = await getSelectedPalettes(projectId);
     this.props.setSelectedPalettes(updatePalettes)

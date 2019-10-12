@@ -37,7 +37,6 @@ class CreatePaletteForm extends Component {
     }
     await postNewPalette(postPalette);
     const updatePalettes = await getSelectedPalettes(projectId);
-    console.log(updatePalettes)
     this.props.setSelectedPalettes(updatePalettes)
     this.setState({ name: "" })
   }
