@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreatePaletteForm should match the snapshot with the data passed through 1`] = `
+<form>
+  <select
+    onChange={[Function]}
+  >
+    <option
+      value=""
+    >
+      Pick Project
+    </option>
+    <option
+      key="Winter"
+      value="Winter"
+    >
+      Winter
+    </option>
+  </select>
+  <input
+    name="name"
+    onChange={[Function]}
+    placeholder="Palette Name"
+    type="text"
+    value=""
+  />
+  <button
+    onClick={[Function]}
+  >
+    Save Palette
+  </button>
+</form>
+`;
