@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should match the snapshot with the data passed through 1`] = `
+<main
+  className="App"
+>
+  <Header
+    generateColors={[Function]}
+  />
+  <Connect(CurrentColors)
+    toggleLock={[Function]}
+  />
+  <Connect(CreatePaletteForm) />
+  <section
+    className="App_projects-section"
+  >
+    <Connect(ProjectsContainer) />
+    <SelectedPalettesContainer />
+  </section>
+</main>
+`;
