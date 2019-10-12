@@ -34,4 +34,26 @@ describe('actions', () => {
 
     expect(result).toEqual(expectedAction);
   });
+
+  it('should have a type of SETPROJECTS', () => {
+    const mockProjects = [{
+      id: 3,
+      name: 'Winter',
+      created_at: '2019-10-10T19:13:08.873Z',
+      updated_at: '2019-10-10T19:13:08.873Z'
+    }];
+    const expectedAction = {
+      type: 'SET_PROJECTS',
+      projects: [{
+        id: 3,
+        name: 'Winter',
+        created_at: '2019-10-10T19:13:08.873Z',
+        updated_at: '2019-10-10T19:13:08.873Z'
+      }]
+    }
+
+    const result = actions.setCurrentProjects(mockProjects);
+
+    expect(result).toEqual(expectedAction);
+  });
 });
