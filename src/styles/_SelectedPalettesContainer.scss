@@ -1,0 +1,17 @@
+.selectedPalettes_section {
+  width: 100%;
+}
+
+.selected-palette p {
+  text-align: center;
+}
+
+.selectedPalettes_section section {
+  display: flex;
+}
+
+.selectedPalettes-color-container div {
+  width: 20%;
+  height: 40px;
+  transform: skew(-20deg);  
+}
