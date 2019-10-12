@@ -9,6 +9,19 @@ export const getAllProjects = async () => {
   return projects;
 }
 
+export const getSelectedPalettes = async (id) => {
+  const url = `https://palette-picker-api-sfjo.herokuapp.com/api/v1/palettes?project_id=${id}`;
+  const response = await fetch(url);
+  const palettes = await response.json();
+  if(!palettes.length) {
+    return null
+  } else if (!response.ok) {
+    throw Error('There was an issue getting your palettes');
+  }
+
+  return palettes;
+}
+
 export const postNewProject = async (name) => {
   const url = 'https://palette-picker-api-sfjo.herokuapp.com/api/v1/projects';
   let options = {
