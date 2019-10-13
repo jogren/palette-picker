@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { postNewProject, getAllProjects, getSelectedPalettes } from '../util/apiCalls';
+import { postNewProject, getAllProjects, getSelectedPalettes, deleteProjectFromDB } from '../util/apiCalls';
 import { setCurrentProjects, setSelectedPalettes } from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -31,11 +31,20 @@ export class ProjectsContainer extends Component {
     this.props.setSelectedPalettes(palettes)
   }
 
+  deleteProject = async (id) => {
+    const { setCurrentProjects } = this.props;
+    await deleteProjectFromDB(id)
+    const projects = await getAllProjects();
+    setCurrentProjects(projects)
+  }
 
   render() {
     const { currentProjects } = this.props;
-    let projectList = currentProjects.map(project => {
-      return <button key={project.name} onClick={() => this.handleProjectSelect(project.id)}>{project.name}</button>
+    let projectList = currentProjects.map((project, index) => {
+      return <div key={index}>
+          <button className="project-name" onClick={() => this.handleProjectSelect(project.id)}>{project.name}</button>
+          <button onClick={() => this.deleteProject(project.id)}>x</button>
+        </div>
     })
     return (
       <section className="ProjectsContainer_section">
