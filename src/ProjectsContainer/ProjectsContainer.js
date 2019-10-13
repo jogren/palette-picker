@@ -41,7 +41,6 @@ export class ProjectsContainer extends Component {
   render() {
     const { currentProjects } = this.props;
     let projectList = currentProjects.map((project, index) => {
-      console.log(project)
       return <div key={index}>
           <button className="project-name" onClick={() => this.handleProjectSelect(project.id)}>{project.name}</button>
           <button onClick={() => this.deleteProject(project.id)}>x</button>
