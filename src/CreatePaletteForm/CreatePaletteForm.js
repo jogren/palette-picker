@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { postNewPalette, getSelectedPalettes, editPalette } from '../util/apiCalls';
-import { setSelectedPalettes } from '../actions';
+import { setSelectedPalettes, clearSelectedPaletteId } from '../actions';
 import { bindActionCreators } from 'redux';
 
 export class CreatePaletteForm extends Component {
@@ -42,7 +42,7 @@ export class CreatePaletteForm extends Component {
   }
 
   handleSaveEdits = async () => {
-    const { currentPalette, currentPaletteId, setSelectedPalettes } = this.props;
+    const { currentPalette, currentPaletteId, setSelectedPalettes, clearSelectedPaletteId } = this.props;
     const paletteToEdit = {
       color1: currentPalette[0].hexCode,
       color2: currentPalette[1].hexCode,
@@ -53,7 +53,7 @@ export class CreatePaletteForm extends Component {
     await editPalette(paletteToEdit, currentPaletteId.id)
     const updatePalettes = await getSelectedPalettes(currentPaletteId.projectId);
     setSelectedPalettes(updatePalettes)
-
+    clearSelectedPaletteId()
   }
 
   render() {
@@ -64,7 +64,7 @@ export class CreatePaletteForm extends Component {
     return (
       <section className="CreatePalette_section">
         {currentPaletteId && <div>
-          <button onClick={this.handleSaveEdits}>Save Changes</button>
+          <button onClick={this.handleSaveEdits}>{`Save Changes for ${currentPaletteId.name}`}</button>
         </div>}
         {!currentPaletteId && <form className="CreatePalette_form">
           <select onChange={(e) => this.handleCurrentProject(e.target.value)} >
@@ -91,7 +91,7 @@ const mapStateToProps = ({ currentProjects, currentPalette, currentPaletteId }) 
 });
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ setSelectedPalettes }, dispatch)
+  bindActionCreators({ setSelectedPalettes, clearSelectedPaletteId }, dispatch)
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePaletteForm);
