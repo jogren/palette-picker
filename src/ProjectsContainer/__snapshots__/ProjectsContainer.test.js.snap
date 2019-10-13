@@ -21,12 +21,21 @@ exports[`ProjectsContainer should match the snapshot with the data passed throug
   <div
     className="div_project-name-container"
   >
-    <button
-      key="Winter"
-      onClick={[Function]}
+    <div
+      key="0"
     >
-      Winter
-    </button>
+      <button
+        className="project-name"
+        onClick={[Function]}
+      >
+        Winter
+      </button>
+      <button
+        onClick={[Function]}
+      >
+        x
+      </button>
+    </div>
   </div>
 </section>
 `;
