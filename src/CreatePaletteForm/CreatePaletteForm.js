@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { postNewPalette, getSelectedPalettes } from '../util/apiCalls';
+import { postNewPalette, getSelectedPalettes, editPalette } from '../util/apiCalls';
 import { setSelectedPalettes } from '../actions';
 import { bindActionCreators } from 'redux';
 
@@ -41,6 +41,19 @@ export class CreatePaletteForm extends Component {
     this.setState({ name: "" })
   }
 
+  handleSaveEdits = () => {
+    const { currentPalette, currentPaletteId } = this.props;
+    const paletteToEdit = {
+      color1: currentPalette[0].hexCode,
+      color2: currentPalette[1].hexCode,
+      color3: currentPalette[2].hexCode,
+      color4: currentPalette[3].hexCode,
+      color5: currentPalette[4].hexCode
+    }
+    editPalette(paletteToEdit, currentPaletteId.id)
+
+  }
+
   render() {
     const { currentProjects, currentPaletteId } = this.props;
     let displayProjects = currentProjects.map(project => {
@@ -49,7 +62,7 @@ export class CreatePaletteForm extends Component {
     return (
       <section className="CreatePalette_section">
         {currentPaletteId && <div>
-          <button>Save Changes</button>
+          <button onClick={this.handleSaveEdits}>Save Changes</button>
         </div>}
         {!currentPaletteId && <form className="CreatePalette_form">
           <select onChange={(e) => this.handleCurrentProject(e.target.value)} >
