@@ -37,5 +37,5 @@ describe('currentPalette reducer', () => {
     const result = currentPalette(undefined, actionObj);
 
     expect(result).toEqual(expected);
-  })
+  });
 });
