@@ -71,7 +71,8 @@ export class CreatePaletteForm extends Component {
 
 const mapStateToProps = ({ currentProjects, currentPalette }) => ({
   currentProjects,
-  currentPalette
+  currentPalette,
+  currentPaletteId
 });
 
 const mapDispatchToProps = dispatch => (

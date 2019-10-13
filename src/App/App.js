@@ -4,7 +4,7 @@ import CurrentColors from '../CurrentColors/CurrentColors';
 import CreatePaletteForm from '../CreatePaletteForm/CreatePaletteForm';
 import ProjectsContainer from '../ProjectsContainer/ProjectsContainer';
 import SelectedPalettesContainer from '../SelectedPalettesContainer/SelectedPalettesContainer';
-import { setCurrentPalette, setCurrentProjects, setSelectedPalettes } from '../actions';
+import { setCurrentPalette, setCurrentProjects, setSelectedPalettes, setCurrentPaletteId } from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAllProjects, deletePaletteFromDB, getSelectedPalettes } from '../util/apiCalls';
@@ -52,16 +52,19 @@ export class App extends Component {
   }
 
   editPalette = (paletteId) => {
-    const { selectedPalettes, setCurrentPalette } = this.props;
+    const { selectedPalettes, setCurrentPalette, setCurrentPaletteId } = this.props;
     const targetPalette = selectedPalettes.find(palette => palette.id === paletteId);
     const colorKeys = ['color1', 'color2', 'color3', 'color4', 'color5']
     let structuredPalette = colorKeys.map(key => {
       return {
         hexCode: targetPalette[key],
-        isLocked: false
+        isLocked: true
       }
     })
+    console.log(targetPalette.id, targetPalette.name)
+    setCurrentPaletteId(targetPalette.id, targetPalette.name)
     setCurrentPalette(structuredPalette)
+
   }
   
   render() {
@@ -85,7 +88,7 @@ const mapStateToProps = ({ currentPalette, selectedPalettes }) => ({
 })
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ setCurrentPalette, setCurrentProjects, setSelectedPalettes }, dispatch)
+  bindActionCreators({ setCurrentPalette, setCurrentProjects, setSelectedPalettes, setCurrentPaletteId }, dispatch)
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
