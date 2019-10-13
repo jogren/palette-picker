@@ -19,3 +19,7 @@ export const setCurrentPaletteId = (id, name, project_id) => ({
   name,
   project_id
 });
+
+export const clearSelectedPaletteId = () => ({
+  type: 'CLEAR_SELECTED'
+});
