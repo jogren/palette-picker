@@ -96,3 +96,21 @@ export const deleteProjectFromDB = async (id) => {
   }
 }
 
+export const editPalette = async (paletteObj, id) => {
+  const url = `https://palette-picker-api-sfjo.herokuapp.com/api/v1/palettes/${id}`;
+  let options = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(paletteObj)
+  }
+
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw Error('There was an issue editing your palette');
+  }
+
+  const paletteId = await response.json();
+  return paletteId;
+}
