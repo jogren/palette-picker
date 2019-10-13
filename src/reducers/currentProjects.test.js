@@ -33,5 +33,5 @@ describe('currentProjects reducer', () => {
     const result = currentProjects(undefined, actionObj);
 
     expect(result).toEqual(expected);
-  })
+  });
 });
