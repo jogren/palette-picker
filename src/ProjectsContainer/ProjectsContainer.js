@@ -55,7 +55,7 @@ export class ProjectsContainer extends Component {
             name="name"
             value={this.state.name}
             onChange={this.handleChange} />
-          <button onClick={this.handleSubmit}>Submit Project Name</button>
+          <button disabled={!this.state.name} onClick={this.handleSubmit}>Submit Project Name</button>
         </form>
         <div className="div_project-name-container">
           {projectList}
