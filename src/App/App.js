@@ -13,15 +13,20 @@ let randomColor = require('randomcolor');
 export class App extends Component {
 
   componentDidMount = async () => {
-    const { setCurrentPalette, setCurrentProjects } = this.props;
+    const { setCurrentProjects } = this.props;
+    this.setRandomPalette();
+    const projects = await getAllProjects();
+    setCurrentProjects(projects)
+  }
+
+  setRandomPalette = () => {
+    const { setCurrentPalette } = this.props;
     let colors = randomColor({ count: 5 });
 
     let structuredColors = colors.map(color => {
       return { hexCode: color, isLocked: false }
     })
     setCurrentPalette(structuredColors)
-    const projects = await getAllProjects();
-    setCurrentProjects(projects)
   }
   
   generateRandomColors = () => {
@@ -72,7 +77,7 @@ export class App extends Component {
       <main className="App">
         <Header generateColors={this.generateRandomColors}/>
         <CurrentColors toggleLock={this.toggleLock}/>
-        <CreatePaletteForm />
+        <CreatePaletteForm setRandomPalette={this.setRandomPalette}/>
         <section className="App_projects-section">
           <ProjectsContainer />
           <SelectedPalettesContainer deletePalette={this.deletePalette} editPalette={this.editPalette}/>
