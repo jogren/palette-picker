@@ -57,6 +57,12 @@ export class CreatePaletteForm extends Component {
     setRandomPalette();
   }
 
+  revertEdits = () => {
+    const { clearSelectedPaletteId, setRandomPalette } = this.props;
+    clearSelectedPaletteId();
+    setRandomPalette();
+  }
+
   render() {
     const { currentProjects, currentPaletteId } = this.props;
     let displayProjects = currentProjects.map(project => {
@@ -66,6 +72,7 @@ export class CreatePaletteForm extends Component {
       <section className="CreatePalette_section">
         {currentPaletteId && <div>
           <button onClick={this.handleSaveEdits}>{`Save Changes for ${currentPaletteId.name}`}</button>
+          <button onClick={this.revertEdits}>Go Back</button>
         </div>}
         {!currentPaletteId && <form className="CreatePalette_form">
           <select onChange={(e) => this.handleCurrentProject(e.target.value)} >
