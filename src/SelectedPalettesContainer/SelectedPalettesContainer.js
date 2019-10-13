@@ -6,7 +6,6 @@ import deleteIcon from '../images/delete.png';
 export const SelectedPalettesContainer = ({ selectedPalettes, deletePalette, editPalette }) => {
 
   let selectedPalettesDisplay = selectedPalettes.map(palette => {
-    if (selectedPalettes[0].name) {
       return <div className="selected-palette" key={palette.name}>
         <header>
           <p>{palette.name}</p>
@@ -20,14 +19,12 @@ export const SelectedPalettesContainer = ({ selectedPalettes, deletePalette, edi
           <div style={{ backgroundColor: palette.color5 }}></div>
         </section>
       </div>
-    } else {
-      return <p>Please select a project to view</p>
-    }
   })
   
   return (
     <section className="selectedPalettes_section">
       { selectedPalettesDisplay }
+      {!selectedPalettes.length && <p>Please select a project to view</p> }
     </section>
   )
 }
