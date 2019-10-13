@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import deleteIcon from '../images/delete.png';
 
 
-export const SelectedPalettesContainer = ({ selectedPalettes, deletePalette }) => {
+export const SelectedPalettesContainer = ({ selectedPalettes, deletePalette, editPalette }) => {
 
   let selectedPalettesDisplay = selectedPalettes.map(palette => {
     if (selectedPalettes[0].name) {
@@ -12,7 +12,7 @@ export const SelectedPalettesContainer = ({ selectedPalettes, deletePalette }) =
           <p>{palette.name}</p>
           <img onClick={() => deletePalette(palette.id, palette.project_id)} src={deleteIcon} alt={palette.name} className="img_color-container"/>
         </header>
-        <section className="color-container">
+        <section className="color-container" onClick={() => editPalette(palette.id)}>
           <div style={{ backgroundColor: palette.color1 }}></div>
           <div style={{ backgroundColor: palette.color2 }}></div>
           <div style={{ backgroundColor: palette.color3 }}></div>

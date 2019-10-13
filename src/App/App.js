@@ -45,10 +45,23 @@ export class App extends Component {
   }
 
   deletePalette = async (paletteId, projectId) => {
+    const { setSelectedPalettes } = this.props;
     await deletePaletteFromDB(paletteId)
     const updatePalettes = await getSelectedPalettes(projectId);
-    this.props.setSelectedPalettes(updatePalettes)
+    setSelectedPalettes(updatePalettes)
+  }
 
+  editPalette = (paletteId) => {
+    const { selectedPalettes, setCurrentPalette } = this.props;
+    const targetPalette = selectedPalettes.find(palette => palette.id === paletteId);
+    const colorKeys = ['color1', 'color2', 'color3', 'color4', 'color5']
+    let structuredPalette = colorKeys.map(key => {
+      return {
+        hexCode: targetPalette[key],
+        isLocked: false
+      }
+    })
+    setCurrentPalette(structuredPalette)
   }
   
   render() {
@@ -59,15 +72,16 @@ export class App extends Component {
         <CreatePaletteForm />
         <section className="App_projects-section">
           <ProjectsContainer />
-          <SelectedPalettesContainer deletePalette={this.deletePalette}/>
+          <SelectedPalettesContainer deletePalette={this.deletePalette} editPalette={this.editPalette}/>
         </section>
       </main>
     );
   }
 }
 
-const mapStateToProps = ({ currentPalette }) => ({
-  currentPalette
+const mapStateToProps = ({ currentPalette, selectedPalettes }) => ({
+  currentPalette,
+  selectedPalettes
 })
 
 const mapDispatchToProps = dispatch => (
