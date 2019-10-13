@@ -42,16 +42,16 @@ export class CreatePaletteForm extends Component {
   }
 
   render() {
-    const { currentProjects } = this.props;
+    const { currentProjects, currentPaletteId } = this.props;
     let displayProjects = currentProjects.map(project => {
       return <option key={project.name} value={project.name}>{project.name}</option>
     })
     return (
       <section className="CreatePalette_section">
-        <div>
+        {currentPaletteId && <div>
           <button>Save Changes</button>
-        </div>
-        <form className="CreatePalette_form">
+        </div>}
+        {!currentPaletteId && <form className="CreatePalette_form">
           <select onChange={(e) => this.handleCurrentProject(e.target.value)} >
             <option value="">Pick Project</option>
             {displayProjects}
@@ -63,13 +63,13 @@ export class CreatePaletteForm extends Component {
             value={this.state.name}
             onChange={this.handleChange} />
           <button onClick={this.handleSubmit}>Save Palette</button>
-        </form>
+        </form>}
       </section>
     )
   }
 }
 
-const mapStateToProps = ({ currentProjects, currentPalette }) => ({
+const mapStateToProps = ({ currentProjects, currentPalette, currentPaletteId }) => ({
   currentProjects,
   currentPalette,
   currentPaletteId
