@@ -12,7 +12,7 @@ exports[`Color should match the snapshot with the data passed through 1`] = `
   <button
     onClick={[Function]}
   >
-    lock
+    <FaLockOpen />
   </button>
   <p>
     #FFFFFF
