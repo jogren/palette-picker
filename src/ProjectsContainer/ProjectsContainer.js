@@ -27,8 +27,13 @@ export class ProjectsContainer extends Component {
   }
 
   handleProjectSelect = async (id) => {
+    const { setSelectedPalettes } = this.props;
     const palettes = await getSelectedPalettes(id);
-    this.props.setSelectedPalettes(palettes)
+    if(!palettes.length) {
+      setSelectedPalettes([])
+    } else {
+      setSelectedPalettes(palettes)
+    }
   }
 
   deleteProject = async (id) => {
