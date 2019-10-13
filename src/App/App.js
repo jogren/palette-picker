@@ -62,7 +62,7 @@ export class App extends Component {
       }
     })
     console.log(targetPalette.id, targetPalette.name)
-    setCurrentPaletteId(targetPalette.id, targetPalette.name)
+    setCurrentPaletteId(targetPalette.id, targetPalette.name, targetPalette.project_id)
     setCurrentPalette(structuredPalette)
 
   }

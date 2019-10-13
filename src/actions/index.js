@@ -13,8 +13,9 @@ export const setSelectedPalettes = (palettes) => ({
   palettes
 });
 
-export const setCurrentPaletteId = (id, name) => ({
+export const setCurrentPaletteId = (id, name, project_id) => ({
   type: 'SET_PALETTE_ID',
   id,
-  name
+  name,
+  project_id
 });
