@@ -41,8 +41,8 @@ export class CreatePaletteForm extends Component {
     this.setState({ name: "" })
   }
 
-  handleSaveEdits = () => {
-    const { currentPalette, currentPaletteId } = this.props;
+  handleSaveEdits = async () => {
+    const { currentPalette, currentPaletteId, setSelectedPalettes } = this.props;
     const paletteToEdit = {
       color1: currentPalette[0].hexCode,
       color2: currentPalette[1].hexCode,
@@ -50,7 +50,9 @@ export class CreatePaletteForm extends Component {
       color4: currentPalette[3].hexCode,
       color5: currentPalette[4].hexCode
     }
-    editPalette(paletteToEdit, currentPaletteId.id)
+    await editPalette(paletteToEdit, currentPaletteId.id)
+    const updatePalettes = await getSelectedPalettes(currentPaletteId.projectId);
+    setSelectedPalettes(updatePalettes)
 
   }
 
