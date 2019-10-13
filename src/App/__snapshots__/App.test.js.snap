@@ -15,7 +15,9 @@ exports[`App should match the snapshot with the data passed through 1`] = `
     className="App_projects-section"
   >
     <Connect(ProjectsContainer) />
-    <SelectedPalettesContainer />
+    <Connect(SelectedPalettesContainer)
+      deletePalette={[Function]}
+    />
   </section>
 </main>
 `;

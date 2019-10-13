@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProjectsContainer should match the snapshot with the data passed through 1`] = `
-<section>
+<section
+  className="ProjectsContainer_section"
+>
   <form>
     <input
       name="name"

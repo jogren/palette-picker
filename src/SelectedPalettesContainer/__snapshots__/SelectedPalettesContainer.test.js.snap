@@ -1,12 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SelectedPalettesContainer should match the snapshot with the data passed through 1`] = `
-<section>
-  <h2>
-    Project 1
-  </h2>
-  <div>
-    color
+<section
+  className="selectedPalettes_section"
+>
+  <div
+    className="selected-palette"
+    key="palette"
+  >
+    <header>
+      <p>
+        palette
+      </p>
+      <img
+        alt="palette"
+        className="img_color-container"
+        onClick={[Function]}
+        src="delete.png"
+      />
+    </header>
+    <section
+      className="color-container"
+    >
+      <div
+        style={
+          Object {
+            "backgroundColor": "#5fd849",
+          }
+        }
+      />
+      <div
+        style={
+          Object {
+            "backgroundColor": "#878dff",
+          }
+        }
+      />
+      <div
+        style={
+          Object {
+            "backgroundColor": "#efa58b",
+          }
+        }
+      />
+      <div
+        style={
+          Object {
+            "backgroundColor": "#f2bf59",
+          }
+        }
+      />
+      <div
+        style={
+          Object {
+            "backgroundColor": "#f73722",
+          }
+        }
+      />
+    </section>
   </div>
 </section>
 `;

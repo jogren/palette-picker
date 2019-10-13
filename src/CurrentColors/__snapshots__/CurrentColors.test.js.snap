@@ -10,6 +10,7 @@ exports[`CurrentColors should match the snapshot with the data passed through 1`
         "backgroundColor": "#25b25d",
       }
     }
+    isLocked={false}
     key="#25b25d"
   />
 </section>
