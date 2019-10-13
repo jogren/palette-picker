@@ -23,7 +23,7 @@ export class CreatePaletteForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { currentProjects, currentPalette} = this.props;
+    const { currentProjects, currentPalette, setSelectedPalettes} = this.props;
     const { name, currentProject } = this.state;
     const projectId = currentProjects.find(project => project.name === currentProject).id;
     const postPalette = {
@@ -37,7 +37,7 @@ export class CreatePaletteForm extends Component {
     }
     await postNewPalette(postPalette);
     const updatePalettes = await getSelectedPalettes(projectId);
-    this.props.setSelectedPalettes(updatePalettes)
+    setSelectedPalettes(updatePalettes)
     this.setState({ name: "" })
   }
 
