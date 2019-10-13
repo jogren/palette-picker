@@ -85,7 +85,7 @@ export class CreatePaletteForm extends Component {
             name="name"
             value={this.state.name}
             onChange={this.handleChange} />
-          <button onClick={this.handleSubmit}>Save Palette</button>
+          <button disabled={!this.state.name || !this.state.currentProject} onClick={this.handleSubmit}>Save Palette</button>
         </form>}
       </section>
     )
