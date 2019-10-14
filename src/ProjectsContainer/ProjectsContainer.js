@@ -27,8 +27,13 @@ export class ProjectsContainer extends Component {
   }
 
   handleProjectSelect = async (id) => {
+    const { setSelectedPalettes } = this.props;
     const palettes = await getSelectedPalettes(id);
-    this.props.setSelectedPalettes(palettes)
+    if(!palettes.length) {
+      setSelectedPalettes([])
+    } else {
+      setSelectedPalettes(palettes)
+    }
   }
 
   deleteProject = async (id) => {
@@ -55,7 +60,7 @@ export class ProjectsContainer extends Component {
             name="name"
             value={this.state.name}
             onChange={this.handleChange} />
-          <button onClick={this.handleSubmit}>Submit Project Name</button>
+          <button disabled={!this.state.name} onClick={this.handleSubmit}>Submit Project Name</button>
         </form>
         <div className="div_project-name-container">
           {projectList}
