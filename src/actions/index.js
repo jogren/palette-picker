@@ -23,3 +23,8 @@ export const setCurrentPaletteId = (id, name, project_id) => ({
 export const clearSelectedPaletteId = () => ({
   type: 'CLEAR_SELECTED'
 });
+
+export const hasErrored = errorMsg => ({
+  type: 'HAS_ERRORED',
+  errorMsg
+});
