@@ -4,7 +4,7 @@ import CurrentColors from '../CurrentColors/CurrentColors';
 import CreatePaletteForm from '../CreatePaletteForm/CreatePaletteForm';
 import ProjectsContainer from '../ProjectsContainer/ProjectsContainer';
 import SelectedPalettesContainer from '../SelectedPalettesContainer/SelectedPalettesContainer';
-import { setCurrentPalette, setCurrentProjects, setSelectedPalettes, setCurrentPaletteId } from '../actions';
+import { setCurrentPalette, setCurrentProjects, setSelectedPalettes, setCurrentPaletteId, hasErrored } from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAllProjects, deletePaletteFromDB, getSelectedPalettes } from '../util/apiCalls';
@@ -13,13 +13,13 @@ let randomColor = require('randomcolor');
 export class App extends Component {
 
   componentDidMount = async () => {
-    const { setCurrentProjects } = this.props;
+    const { setCurrentProjects, hasErrored } = this.props;
     this.setRandomPalette();
     try {
       const projects = await getAllProjects();
       setCurrentProjects(projects);
     } catch({error}) {
-      console.log(error)
+      hasErrored(error)
     }
   }
 
@@ -54,13 +54,13 @@ export class App extends Component {
   }
 
   deletePalette = async (paletteId, projectId) => {
-    const { setSelectedPalettes } = this.props;
+    const { setSelectedPalettes, hasErrored } = this.props;
     try {
       await deletePaletteFromDB(paletteId);
       const updatePalettes = await getSelectedPalettes(projectId);
       setSelectedPalettes(updatePalettes);
     } catch({error}) {
-      console.log(error)
+      hasErrored(error)
     }
   }
 
@@ -100,7 +100,7 @@ const mapStateToProps = ({ currentPalette, selectedPalettes }) => ({
 })
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ setCurrentPalette, setCurrentProjects, setSelectedPalettes, setCurrentPaletteId }, dispatch)
+  bindActionCreators({ setCurrentPalette, setCurrentProjects, setSelectedPalettes, setCurrentPaletteId, hasErrored }, dispatch)
 )
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
