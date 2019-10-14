@@ -4,11 +4,6 @@ exports[`CreatePaletteForm should match the snapshot with the data passed throug
 <section
   className="CreatePalette_section"
 >
-  <div>
-    <button>
-      Save Changes
-    </button>
-  </div>
   <form
     className="CreatePalette_form"
   >
@@ -35,6 +30,7 @@ exports[`CreatePaletteForm should match the snapshot with the data passed throug
       value=""
     />
     <button
+      disabled={true}
       onClick={[Function]}
     >
       Save Palette
