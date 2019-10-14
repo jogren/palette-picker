@@ -10,13 +10,16 @@ exports[`App should match the snapshot with the data passed through 1`] = `
   <Connect(CurrentColors)
     toggleLock={[Function]}
   />
-  <Connect(CreatePaletteForm) />
+  <Connect(CreatePaletteForm)
+    setRandomPalette={[Function]}
+  />
   <section
     className="App_projects-section"
   >
     <Connect(ProjectsContainer) />
     <Connect(SelectedPalettesContainer)
       deletePalette={[Function]}
+      editPalette={[Function]}
     />
   </section>
 </main>

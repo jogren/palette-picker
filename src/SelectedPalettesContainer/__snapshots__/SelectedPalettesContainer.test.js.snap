@@ -21,6 +21,7 @@ exports[`SelectedPalettesContainer should match the snapshot with the data passe
     </header>
     <section
       className="color-container"
+      onClick={[Function]}
     >
       <div
         style={

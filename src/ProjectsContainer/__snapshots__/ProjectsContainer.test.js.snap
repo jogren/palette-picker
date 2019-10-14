@@ -13,6 +13,7 @@ exports[`ProjectsContainer should match the snapshot with the data passed throug
       value=""
     />
     <button
+      disabled={true}
       onClick={[Function]}
     >
       Submit Project Name
