@@ -8,22 +8,29 @@ export class ProjectsContainer extends Component {
   constructor() {
     super();
     this.state = {
-      name: ""
+      name: "",
+      hasErrored: ""
     }
   }
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
+    this.setState({ hasErrored: "" })
   }
 
   handleSubmit = async (e) => {
     const { name } = this.state;
     const { setCurrentProjects } = this.props;
     e.preventDefault();
-    await postNewProject(name);
-    const projects = await getAllProjects();
-    setCurrentProjects(projects)
-    this.setState({ name: "" });
+    try {
+      await postNewProject(name);
+      const projects = await getAllProjects();
+      setCurrentProjects(projects)
+      this.setState({ name: "" });
+    } catch(error) {
+      this.setState({ name: "" });
+      this.setState({ hasErrored: error.message })
+    }
   }
 
   handleProjectSelect = async (id) => {
@@ -62,6 +69,7 @@ export class ProjectsContainer extends Component {
             onChange={this.handleChange} />
           <button disabled={!this.state.name} onClick={this.handleSubmit}>Submit Project Name</button>
         </form>
+        {this.state.hasErrored && <p>{this.state.hasErrored}</p>}
         <div className="div_project-name-container">
           {projectList}
         </div>
