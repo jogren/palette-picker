@@ -33,7 +33,7 @@ export const postNewProject = async (name) => {
 
   const response = await fetch(url, options);
   if(!response.ok) {
-    throw Error('There was an issue posting your project');
+    throw Error('Project name already exists');
   }
 
   const project = await response.json();
