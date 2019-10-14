@@ -15,8 +15,12 @@ export class App extends Component {
   componentDidMount = async () => {
     const { setCurrentProjects } = this.props;
     this.setRandomPalette();
-    const projects = await getAllProjects();
-    setCurrentProjects(projects)
+    try {
+      const projects = await getAllProjects();
+      setCurrentProjects(projects);
+    } catch({error}) {
+      console.log(error)
+    }
   }
 
   setRandomPalette = () => {
@@ -51,9 +55,13 @@ export class App extends Component {
 
   deletePalette = async (paletteId, projectId) => {
     const { setSelectedPalettes } = this.props;
-    await deletePaletteFromDB(paletteId)
-    const updatePalettes = await getSelectedPalettes(projectId);
-    setSelectedPalettes(updatePalettes)
+    try {
+      await deletePaletteFromDB(paletteId);
+      const updatePalettes = await getSelectedPalettes(projectId);
+      setSelectedPalettes(updatePalettes);
+    } catch({error}) {
+      console.log(error)
+    }
   }
 
   editPalette = (paletteId) => {
