@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { postNewPalette, getSelectedPalettes, editPalette } from '../util/apiCalls';
-import { setSelectedPalettes, clearSelectedPaletteId } from '../actions';
+import { setSelectedPalettes, clearSelectedPaletteId, hasErrored } from '../actions';
 import { bindActionCreators } from 'redux';
 
 export class CreatePaletteForm extends Component {
@@ -23,7 +23,7 @@ export class CreatePaletteForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { currentProjects, currentPalette, setSelectedPalettes} = this.props;
+    const { currentProjects, currentPalette, setSelectedPalettes, hasErrored} = this.props;
     const { name, currentProject } = this.state;
     const projectId = currentProjects.find(project => project.name === currentProject).id;
     const postPalette = {
@@ -35,14 +35,19 @@ export class CreatePaletteForm extends Component {
       color4: currentPalette[3].hexCode,
       color5: currentPalette[4].hexCode
     }
-    await postNewPalette(postPalette);
-    const updatePalettes = await getSelectedPalettes(projectId);
-    setSelectedPalettes(updatePalettes)
+    try {
+      await postNewPalette(postPalette);
+      const updatePalettes = await getSelectedPalettes(projectId);
+      setSelectedPalettes(updatePalettes);
+    } catch ({error}) {
+      hasErrored(error)
+    }
+    
     this.setState({ name: "" })
   }
 
   handleSaveEdits = async () => {
-    const { currentPalette, currentPaletteId, setSelectedPalettes, clearSelectedPaletteId, setRandomPalette } = this.props;
+    const { currentPalette, currentPaletteId, setSelectedPalettes, clearSelectedPaletteId, setRandomPalette, hasErrored } = this.props;
     const paletteToEdit = {
       color1: currentPalette[0].hexCode,
       color2: currentPalette[1].hexCode,
@@ -50,9 +55,13 @@ export class CreatePaletteForm extends Component {
       color4: currentPalette[3].hexCode,
       color5: currentPalette[4].hexCode
     }
-    await editPalette(paletteToEdit, currentPaletteId.id)
-    const updatePalettes = await getSelectedPalettes(currentPaletteId.projectId);
-    setSelectedPalettes(updatePalettes);
+    try {
+      await editPalette(paletteToEdit, currentPaletteId.id);
+      const updatePalettes = await getSelectedPalettes(currentPaletteId.projectId);
+      setSelectedPalettes(updatePalettes);
+    } catch ({error}) {
+      hasErrored(error);
+    }
     clearSelectedPaletteId();
     setRandomPalette();
   }
@@ -99,7 +108,7 @@ const mapStateToProps = ({ currentProjects, currentPalette, currentPaletteId }) 
 });
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ setSelectedPalettes, clearSelectedPaletteId }, dispatch)
+  bindActionCreators({ setSelectedPalettes, clearSelectedPaletteId, hasErrored }, dispatch)
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePaletteForm);
