@@ -39,8 +39,8 @@ export class CreatePaletteForm extends Component {
       await postNewPalette(postPalette);
       const updatePalettes = await getSelectedPalettes(projectId);
       setSelectedPalettes(updatePalettes);
-    } catch ({error}) {
-      hasErrored(error)
+    } catch ({message}) {
+      hasErrored(message)
     }
     
     this.setState({ name: "" })
@@ -59,8 +59,8 @@ export class CreatePaletteForm extends Component {
       await editPalette(paletteToEdit, currentPaletteId.id);
       const updatePalettes = await getSelectedPalettes(currentPaletteId.projectId);
       setSelectedPalettes(updatePalettes);
-    } catch ({error}) {
-      hasErrored(error);
+    } catch ({message}) {
+      hasErrored(message);
     }
     clearSelectedPaletteId();
     setRandomPalette();
