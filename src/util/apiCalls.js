@@ -88,7 +88,7 @@ export const deleteProjectFromDB = async (id) => {
     }
     const response = await fetch(url, options)
     if (!response.ok) {
-      throw new Error('There was an error deleting that palette');
+      throw new Error('There was an error deleting that project');
     }
   } catch (error) {
     throw new Error(error.message);
