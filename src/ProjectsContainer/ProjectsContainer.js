@@ -27,27 +27,35 @@ export class ProjectsContainer extends Component {
       const projects = await getAllProjects();
       setCurrentProjects(projects)
       this.setState({ name: "" });
-    } catch(error) {
+    } catch({message}) {
       this.setState({ name: "" });
-      this.setState({ hasErrored: error.message })
+      this.setState({ hasErrored: message })
     }
   }
 
   handleProjectSelect = async (id) => {
-    const { setSelectedPalettes } = this.props;
-    const palettes = await getSelectedPalettes(id);
-    if(!palettes.length) {
-      setSelectedPalettes([])
-    } else {
-      setSelectedPalettes(palettes)
+    const { setSelectedPalettes, hasErrored } = this.props;
+    try {
+      const palettes = await getSelectedPalettes(id);
+      if (!palettes.length) {
+        setSelectedPalettes([])
+      } else {
+        setSelectedPalettes(palettes)
+      }
+    } catch({message}) {
+      hasErrored(message)
     }
   }
 
   deleteProject = async (id) => {
-    const { setCurrentProjects } = this.props;
-    await deleteProjectFromDB(id)
-    const projects = await getAllProjects();
-    setCurrentProjects(projects)
+    const { setCurrentProjects, hasErrored } = this.props;
+    try {
+      await deleteProjectFromDB(id);
+      const projects = await getAllProjects();
+      setCurrentProjects(projects);
+    } catch ({message}) {
+      hasErrored(message)
+    }
   }
 
   render() {
