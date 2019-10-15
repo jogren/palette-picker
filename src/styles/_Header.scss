@@ -5,8 +5,10 @@ header {
 }
 
 h1 {
-  color: #fff;
+  color: $secondary;
+  font-family: $font-heading;
   font-size: 3em;
+  font-weight: $font-light;
 }
 
 .generate-color-btn {
