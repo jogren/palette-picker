@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { postNewProject, getAllProjects, getSelectedPalettes, deleteProjectFromDB } from '../util/apiCalls';
-import { setCurrentProjects, setSelectedPalettes } from '../actions';
+import { setCurrentProjects, setSelectedPalettes, hasErrored } from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -91,6 +91,6 @@ const mapStateToProps = ({ currentProjects }) => ({
 })
 
 const mapDispatchToProps = dispatch => (
-  bindActionCreators({ setCurrentProjects, setSelectedPalettes }, dispatch)
+  bindActionCreators({ setCurrentProjects, setSelectedPalettes, hasErrored }, dispatch)
 )
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);

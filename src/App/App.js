@@ -18,8 +18,8 @@ export class App extends Component {
     try {
       const projects = await getAllProjects();
       setCurrentProjects(projects);
-    } catch({error}) {
-      hasErrored(error)
+    } catch({message}) {
+      hasErrored(message)
     }
   }
 
@@ -59,8 +59,8 @@ export class App extends Component {
       await deletePaletteFromDB(paletteId);
       const updatePalettes = await getSelectedPalettes(projectId);
       setSelectedPalettes(updatePalettes);
-    } catch({error}) {
-      hasErrored(error)
+    } catch({message}) {
+      hasErrored(message)
     }
   }
 
