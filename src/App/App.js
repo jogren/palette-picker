@@ -76,7 +76,6 @@ export class App extends Component {
     })
     setCurrentPaletteId(targetPalette.id, targetPalette.name, targetPalette.project_id)
     setCurrentPalette(structuredPalette)
-
   }
   
   render() {
