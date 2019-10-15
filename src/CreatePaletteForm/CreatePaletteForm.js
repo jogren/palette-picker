@@ -101,13 +101,13 @@ export class CreatePaletteForm extends Component {
   }
 }
 
-const mapStateToProps = ({ currentProjects, currentPalette, currentPaletteId }) => ({
+export const mapStateToProps = ({ currentProjects, currentPalette, currentPaletteId }) => ({
   currentProjects,
   currentPalette,
   currentPaletteId
 });
 
-const mapDispatchToProps = dispatch => (
+export const mapDispatchToProps = dispatch => (
   bindActionCreators({ setSelectedPalettes, clearSelectedPaletteId, hasErrored }, dispatch)
 );
 
