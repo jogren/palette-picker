@@ -19,7 +19,7 @@ export class App extends Component {
       const projects = await getAllProjects();
       setCurrentProjects(projects);
     } catch({message}) {
-      hasErrored(message)
+      hasErrored(message);
     }
   }
 
@@ -30,7 +30,7 @@ export class App extends Component {
     let structuredColors = colors.map(color => {
       return { hexCode: color, isLocked: false }
     })
-    setCurrentPalette(structuredColors)
+    setCurrentPalette(structuredColors);
   }
   
   generateRandomColors = () => {
@@ -38,7 +38,7 @@ export class App extends Component {
     let updatedColors = currentPalette.map(color => {
       return color.isLocked ? color : { hexCode: randomColor(), isLocked: false }
     })
-    setCurrentPalette(updatedColors)
+    setCurrentPalette(updatedColors);
   }
 
   toggleLock = (toggleColor) => {
@@ -47,7 +47,7 @@ export class App extends Component {
       if (color.hexCode === toggleColor) {
         return { hexCode: color.hexCode, isLocked: !color.isLocked }
       } else {
-        return color
+        return color;
       }
     })
     setCurrentPalette(updatedPalette)
@@ -60,22 +60,22 @@ export class App extends Component {
       const updatePalettes = await getSelectedPalettes(projectId);
       setSelectedPalettes(updatePalettes);
     } catch({message}) {
-      hasErrored(message)
+      hasErrored(message);
     }
   }
 
   editPalette = (paletteId) => {
     const { selectedPalettes, setCurrentPalette, setCurrentPaletteId } = this.props;
     const targetPalette = selectedPalettes.find(palette => palette.id === paletteId);
-    const colorKeys = ['color1', 'color2', 'color3', 'color4', 'color5']
+    const colorKeys = ['color1', 'color2', 'color3', 'color4', 'color5'];
     let structuredPalette = colorKeys.map(key => {
       return {
         hexCode: targetPalette[key],
         isLocked: true
       }
     })
-    setCurrentPaletteId(targetPalette.id, targetPalette.name, targetPalette.project_id)
-    setCurrentPalette(structuredPalette)
+    setCurrentPaletteId(targetPalette.id, targetPalette.name, targetPalette.project_id);
+    setCurrentPalette(structuredPalette);
   }
   
   render() {
