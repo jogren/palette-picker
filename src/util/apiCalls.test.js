@@ -1,4 +1,4 @@
-import { getAllProjects, getSelectedPalettes, postNewProject, postNewPalette } from './apiCalls';
+import { getAllProjects, getSelectedPalettes, postNewProject, postNewPalette, deletePaletteFromDB, deleteProjectFromDB, editPalette } from './apiCalls';
 
 describe('getAllProjects', () => {
   let mockProjects;
@@ -166,7 +166,7 @@ describe('postNewProject', () => {
         })
       })
 
-    expect(postNewProject(mockName)).rejects.toEqual(Error('There was an issue posting your project'))
+    expect(postNewProject(mockName)).rejects.toEqual(Error('Project name already exists'))
   });
 
   it('should return an error if the promise rejects', () => {
@@ -239,3 +239,54 @@ describe('postNewPalette', () => {
     expect(postNewPalette(mockPalette)).rejects.toEqual(Error('Failed to post palette'))
   });
 });
+
+describe('deletePaletteFromDB', () => {
+  let options;
+
+  beforeEach(() => {
+    options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve()
+      })
+    })
+  });
+
+  it('should call fetch with the correct url', () => {
+    deletePaletteFromDB(1);
+
+    expect(window.fetch).toHaveBeenCalledWith('https://palette-picker-api-sfjo.herokuapp.com/api/v1/palettes/1', options);
+  });
+
+  it('should return nothing', () => {
+    expect(deletePaletteFromDB(1)).resolves.toEqual();
+  });
+
+  it('should return an error if the promise resolves but the property ok isn\'t true', () => {
+    window.fetch = jest.fn()
+      .mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        })
+      })
+
+    expect(deletePaletteFromDB(1)).rejects.toEqual(Error('There was an error deleting that palette'))
+  });
+
+  it('should return an error if the promise rejects', () => {
+    window.fetch = jest.fn()
+      .mockImplementation(() => {
+        return Promise.reject(Error('Failed to delete palette'))
+      })
+
+    expect(deletePaletteFromDB(1)).rejects.toEqual(Error('Failed to delete palette'))
+  });
+});
+
