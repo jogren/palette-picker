@@ -1,3 +1,20 @@
+.App {
+  background-color: #3e3b39;
+  height: 100vh;
+}
+
 .App_projects-section {
   display: flex;
+}
+
+button {
+  border: none;
+}
+
+input {
+  border: none;
+}
+
+p {
+  color: aliceblue;
 }
