@@ -1,5 +1,5 @@
 .App {
-  background-color: #3e3b39;
+  background-color: $primary;
   height: 100vh;
 }
 
@@ -9,6 +9,7 @@
 
 button {
   border: none;
+  font-family: $font-body;
 }
 
 input {
@@ -16,5 +17,6 @@ input {
 }
 
 p {
-  color: aliceblue;
+  color: $secondary;
+  font-family: $font-body;
 }
