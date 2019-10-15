@@ -339,3 +339,62 @@ describe('deleteProjectFromDB', () => {
   });
 });
 
+describe('editPalette', () => {
+  let mockPalette;
+  let options;
+
+  beforeEach(() => {
+    mockPalette = {
+      name: 'mint',
+      project_id: 4,
+      color1: '#98ff98',
+      color2: '#98ff98',
+      color3: '#98ff98',
+      color4: '#98ff98',
+      color5: '#98ff98'
+    }
+    options = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(mockPalette)
+    }
+
+    window.fetch = jest.fn().mockImplementation(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(1)
+      })
+    })
+  });
+
+  it('should call fetch with the correct url', () => {
+    editPalette(mockPalette, 1);
+
+    expect(window.fetch).toHaveBeenCalledWith('https://palette-picker-api-sfjo.herokuapp.com/api/v1/palettes/1', options);
+  });
+
+  it('should return nothing', () => {
+    expect(editPalette(1)).resolves.toEqual(1);
+  });
+
+  it('should return an error if the promise resolves but the property ok isn\'t true', () => {
+    window.fetch = jest.fn()
+      .mockImplementation(() => {
+        return Promise.resolve({
+          ok: false
+        })
+      })
+
+    expect(editPalette(1)).rejects.toEqual(Error('There was an issue editing your palette'))
+  });
+
+  it('should return an error if the promise rejects', () => {
+    window.fetch = jest.fn()
+      .mockImplementation(() => {
+        return Promise.reject(Error('Failed to edit palette'))
+      })
+    expect(editPalette(1)).rejects.toEqual(Error('Failed to edit palette'))
+  });
+});
