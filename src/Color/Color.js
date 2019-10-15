@@ -1,15 +1,14 @@
 import React from 'react';
-import { FaLockOpen } from 'react-icons/fa';
-import { FaLock } from 'react-icons/fa';
+import { FiLock, FiUnlock } from "react-icons/fi";
 
 
 const Color = ({ color, isLocked, toggleLock }) => {
-  let lockedImg = isLocked ? <FaLock /> : <FaLockOpen />
-
+  let lockedImg = isLocked ? <FiLock /> : <FiUnlock />
+  const upperCaseHex = color.backgroundColor.toUpperCase();
   return (
-    <article className="color" style={color}>
-      <button onClick={() => toggleLock(color.backgroundColor)}>{lockedImg}</button>
-      <p>{color.backgroundColor}</p>
+    <article className="color" style={color} onClick={() => toggleLock(color.backgroundColor)}>
+      <button className="lock-btn">{lockedImg}</button>
+      <p className="hex-name">{upperCaseHex}</p>
     </article>
   )
 }

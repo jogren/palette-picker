@@ -1,3 +1,27 @@
 .color {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 0 0 0;
   width: 20%;
+}
+
+.lock-btn {
+  background-color: transparent;
+}
+
+svg {
+  color: $primary;
+  height: 8em;
+  width: 8em;
+}
+
+.hex-name {
+  background-color: $primary;
+  font-size: 1.5em;
+  padding: 5px 0;
+  text-align: center;
+  width: 100%;
 }
