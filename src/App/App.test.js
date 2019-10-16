@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { App } from './App';
+import { App, mapStateToProps, mapDispatchToProps } from './App';
 import { setCurrentPalette, setCurrentProjects, setSelectedPalettes, setCurrentPaletteId, hasErrored } from '../actions';
 import { getAllProjects, deletePaletteFromDB, getSelectedPalettes } from '../util/apiCalls';
 
@@ -57,6 +57,25 @@ describe('App', () => {
     color4: '#fcf4a1',
     color5: '#7a35c4'
   }]
+  const currentProjectsMock = [{
+    id: 13,
+    name: '123456',
+    created_at: '2019-10-13T17:40:38.824Z',
+    updated_at: '2019-10-13T17:40:38.824Z'
+  }]
+  const currentPaletteIdMock = {
+    id: 49,
+    name: '12345',
+    projectId: 13
+  }
+
+  const mockState = {
+    currentPalette: currentPaletteMock,
+    currentProjects: currentProjectsMock,
+    selectedPalettes: selectedPalettesMock,
+    currentPaletteId: currentPaletteIdMock,
+    errorMsg: ""
+  }
   
   beforeEach(() => {
     wrapper = shallow(<App 
@@ -73,4 +92,16 @@ describe('App', () => {
   it('should match the snapshot with the data passed through', () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('mapStateToProps should grab the props it needs', () => {
+    const expected = {
+      currentPalette: currentPaletteMock,
+      selectedPalettes: selectedPalettesMock
+    }
+
+    const mappedProps = mapStateToProps(mockState);
+
+    expect(mappedProps).toEqual(expected);
+  });
+
 });
