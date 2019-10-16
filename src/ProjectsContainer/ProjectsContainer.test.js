@@ -13,6 +13,7 @@ describe('ProjectsContainer', () => {
   const setSelectedPalettesMock = jest.fn();
   const setCurrentProjectsMock = jest.fn();
   const hasErroredMock = jest.fn();
+  const setCurrentProjectIdMock = jest.fn();
   const currentProjectsMock = [{
     id: 3,
     name: "Winter",
@@ -26,6 +27,7 @@ describe('ProjectsContainer', () => {
       setSelectedPalettes={setSelectedPalettesMock}
       currentProjects={currentProjectsMock}
       hasErrored={hasErroredMock}
+      setCurrentProjectId={setCurrentProjectIdMock}
       />)
   });
   
@@ -52,6 +54,7 @@ describe('ProjectsContainer', () => {
   it('should call getSelectedPalettes when handleProjectSelect is invoked and promise rejects', async () => {
     wrapper.instance().handleProjectSelect(3);
 
+    expect(setCurrentProjectIdMock).toHaveBeenCalledWith(3);
     await expect(getSelectedPalettes).toHaveBeenCalledWith(3);
   });
 

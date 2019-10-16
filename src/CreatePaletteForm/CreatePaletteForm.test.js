@@ -11,7 +11,8 @@ describe('CreatePaletteForm', () => {
   let mockSetSelectedPalettes = jest.fn();
   let mockClearSelectedPaletteId = jest.fn();
   let mockHasErrored = jest.fn();
-  let mockSetRandomPalette = jest.fn()
+  let mockSetRandomPalette = jest.fn();
+  let setCurrentProjectIdMock = jest.fn();
   const currentProjectsMock = [{
     id: 3,
     name: "Winter",
@@ -73,6 +74,7 @@ describe('CreatePaletteForm', () => {
       clearSelectedPaletteId={mockClearSelectedPaletteId}
       hasErrored={mockHasErrored}
       setRandomPalette={mockSetRandomPalette}
+      setCurrentProjectId={setCurrentProjectIdMock}
       />)
   });
 
@@ -105,6 +107,7 @@ describe('CreatePaletteForm', () => {
     
     await expect(postNewPalette).toHaveBeenCalled();
     await expect(getSelectedPalettes).toHaveBeenCalled();
+    expect(setCurrentProjectIdMock).toHaveBeenCalled();
     expect(mockSetSelectedPalettes).toHaveBeenCalled();
     expect(wrapper.state('name')).toEqual("")
   });
