@@ -118,13 +118,6 @@ describe('CreatePaletteForm', () => {
     expect(mockSetRandomPalette).toHaveBeenCalled();
   });
 
-  it.skip('should call handleSaveEdits on button click', () => {
-    wrapper.instance().handleSaveEdits = jest.fn();
-    // wrapper.instance().forceUpdate();
-    wrapper.find('button').first().simulate('click');
-    expect(wrapper.instance().handleSaveEdits).toHaveBeenCalled()
-  });
-
   it('mapStateToProps should grab the props it needs', () => {
     const expected = {
       currentPalette: currentPaletteMock,

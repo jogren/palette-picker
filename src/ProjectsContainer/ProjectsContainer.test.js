@@ -18,7 +18,7 @@ describe('ProjectsContainer', () => {
     name: "Winter",
     created_at: "2019-10-10T19:13:08.873Z",
     updated_at: "2019-10-10T19:13:08.873Z",
-  }]
+  }];
 
   beforeEach(() => {
     wrapper = shallow(<ProjectsContainer
@@ -37,7 +37,7 @@ describe('ProjectsContainer', () => {
     wrapper.find('input').at(0).simulate('change', { target: { value: 'New Project', name: 'name' } });
     expect(wrapper.state('name')).toEqual('New Project');
     expect(wrapper.state('hasErrored')).toEqual("");
-  })
+  });
 
   it('should invoke postNewProject, getAllProjects and setCurrentProjects when promise resolves', async () => {
     const mockEvent = { preventDefault: jest.fn() }
@@ -47,25 +47,13 @@ describe('ProjectsContainer', () => {
     await expect(getAllProjects).toHaveBeenCalled();
     expect(setCurrentProjectsMock).toHaveBeenCalled();
     expect(wrapper.state('name')).toEqual("");
-  })
-
-  it.skip('should fail', async () => {
-    const mockEvent = { preventDefault: jest.fn() }
-    wrapper.instance().handleSubmit(mockEvent);
-    postNewProject = jest.fn()
-      .mockImplementation(() => {
-        return Promise.reject(Error('Failed to post project'))
-      })
-
-    expect(wrapper.state('name')).toEqual("");
-    expect(wrapper.state('hasErrored')).toEqual("Failed to post project");
-  })
+  });
 
   it('should call getSelectedPalettes when handleProjectSelect is invoked and promise rejects', async () => {
     wrapper.instance().handleProjectSelect(3);
 
     await expect(getSelectedPalettes).toHaveBeenCalledWith(3);
-  })
+  });
 
   it('should invoke deleteProjectFromDB, getAllProjects and setCurrentProjects when deleteProject is invoked', async () => {
     wrapper.instance().deleteProject(3);
@@ -73,7 +61,7 @@ describe('ProjectsContainer', () => {
     await expect(deleteProjectFromDB).toHaveBeenCalledWith(3);
     await expect(getAllProjects).toHaveBeenCalled();
     expect(setCurrentProjectsMock).toHaveBeenCalled();
-  })
+  });
 });
 
 describe('mapDispatchToProps', () => {
@@ -115,7 +103,7 @@ describe('mapDispatchToProps', () => {
     // Expectaion
     expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });
-})
+});
 
 describe('mapStateToProps', () => {
   it('should return an array with the currentProjects', () => {
