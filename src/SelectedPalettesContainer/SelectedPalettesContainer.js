@@ -29,7 +29,7 @@ export const SelectedPalettesContainer = ({ selectedPalettes, deletePalette, edi
   )
 }
 
-const mapStateToProps = ({ selectedPalettes }) => ({
+export const mapStateToProps = ({ selectedPalettes }) => ({
   selectedPalettes
 });
 

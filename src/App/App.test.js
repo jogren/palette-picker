@@ -56,18 +56,18 @@ describe('App', () => {
     color3: '#a567c6',
     color4: '#fcf4a1',
     color5: '#7a35c4'
-  }]
+  }];
   const currentProjectsMock = [{
     id: 13,
     name: '123456',
     created_at: '2019-10-13T17:40:38.824Z',
     updated_at: '2019-10-13T17:40:38.824Z'
-  }]
+  }];
   const currentPaletteIdMock = {
     id: 49,
     name: '12345',
     projectId: 13
-  }
+  };
 
   const mockState = {
     currentPalette: currentPaletteMock,
