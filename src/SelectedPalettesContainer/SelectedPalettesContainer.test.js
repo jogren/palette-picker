@@ -53,6 +53,15 @@ describe('SelectedPalettesContainer', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should match the snapshot with the data passed through', () => {
+    wrapper = shallow(<SelectedPalettesContainer
+      deletePalette={deletePaletteMock}
+      selectedPalettes={[]}
+      editPalette={editPaletteMock}
+    />)
+    expect(wrapper).toMatchSnapshot();
+  });
+
   it('mapStateToProps should grab the props it needs', () => {
     const expected = {
       selectedPalettes: selectedPalettesMock
