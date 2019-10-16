@@ -1,5 +1,6 @@
 .selectedPalettes_section {
   width: 100%;
+  position: relative;
 }
 
 .selected-palette header {
@@ -31,4 +32,10 @@
   cursor: pointer;
   height: 2em;
   width: 2em;
+}
+
+.no-selected-palettes {
+  position: absolute;
+  top: 40%;
+  left: 40%
 }
