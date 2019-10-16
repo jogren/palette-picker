@@ -62,3 +62,13 @@ exports[`SelectedPalettesContainer should match the snapshot with the data passe
   </div>
 </section>
 `;
+
+exports[`SelectedPalettesContainer should match the snapshot with the data passed through 2`] = `
+<section
+  className="selectedPalettes_section"
+>
+  <p>
+    Please select a project to view
+  </p>
+</section>
+`;
