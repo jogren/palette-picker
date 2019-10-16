@@ -1,7 +1,7 @@
 header {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
+  padding: 15px 15px 0px 15px;
 }
 
 h1 {
@@ -14,4 +14,17 @@ h1 {
 .generate-color-btn {
   font-size: 1em;
   width: 200px;
+}
+
+.generate-color-btn:hover{ 
+  animation: Generate_New_Color 1s;
+  animation-timing-function: linear;   
+}
+
+@keyframes Generate_New_Color {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-2deg); }
+  100% { transform: rotate(0deg); }
 }

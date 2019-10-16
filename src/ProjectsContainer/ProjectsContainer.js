@@ -72,7 +72,7 @@ export class ProjectsContainer extends Component {
         <form>
           <input 
             type="text"
-            placeholder="New Project's Name"
+            placeholder="New Project's Name..."
             name="name"
             value={this.state.name}
             onChange={this.handleChange} />
