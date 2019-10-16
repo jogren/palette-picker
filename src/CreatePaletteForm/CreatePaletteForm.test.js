@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { CreatePaletteForm, mapStateToProps, mapDispatchToProps } from './CreatePaletteForm';
 import { postNewPalette, getSelectedPalettes } from '../util/apiCalls';
+import { setSelectedPalettes, clearSelectedPaletteId, hasErrored } from '../actions';
 
 jest.mock('../util/apiCalls');
 
@@ -134,5 +135,32 @@ describe('CreatePaletteForm', () => {
     const mappedProps = mapStateToProps(mockState);
 
     expect(mappedProps).toEqual(expected);
+  });
+
+  it('it calls dispatch with the setSelectedPalettes action', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = setSelectedPalettes(selectedPalettesMock);
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.setSelectedPalettes(selectedPalettesMock);
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+
+  it('it calls dispatch with the clearSelectedPaletteId action', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = clearSelectedPaletteId();
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.clearSelectedPaletteId();
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+
+  it('it calls dispatch with the hasErrored action', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = hasErrored("Error retrieving projects");
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.hasErrored("Error retrieving projects");
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });
 });
