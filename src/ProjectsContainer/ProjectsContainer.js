@@ -66,15 +66,17 @@ export class ProjectsContainer extends Component {
     const { currentProjects, currentProjectId } = this.props;
     let projectList = currentProjects.map((project, index) => {
       let projectClass = project.id === currentProjectId ? 'button_selected-Project' : 'project-name'
-      return <div key={index}>
-        <button className={projectClass} onClick={() => this.handleProjectSelect(project.id)}>{project.name}</button>
+      return <div key={index} className="div_buttons-container">
+        <button className={projectClass} id="button_project-name" onClick={() => this.handleProjectSelect(project.id)}>{project.name}</button>
         <button className="trash-btn" onClick={() => this.deleteProject(project.id)}><FiTrash2 className="trash-img-project" /></button>
         </div>
     })
     return (
       <section className="ProjectsContainer_section">
         <form>
+          <label htmlFor="create-project">Create a Project</label>
           <input 
+            id="create-project"
             type="text"
             placeholder="Enter Name..."
             name="name"

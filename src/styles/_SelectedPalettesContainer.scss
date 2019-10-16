@@ -4,6 +4,9 @@
   overflow: scroll;
   height: 37vh;
   padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
 }
 
 .selected-palette header {
@@ -22,7 +25,7 @@
 
 .color-container div {
   width: 20%;
-  height: 40px;
+  height: 25px;
   cursor: pointer;
 }
 

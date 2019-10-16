@@ -75,8 +75,8 @@ export class CreatePaletteForm extends Component {
 
   render() {
     const { currentProjects, currentPaletteId } = this.props;
-    let displayProjects = currentProjects.map(project => {
-      return <option key={project.name} value={project.name}>{project.name}</option>
+    let displayProjects = currentProjects.map((project, index) => {
+      return <option key={`${project.name}-${index}`} value={project.name}>{project.name}</option>
     })
     return (
       <section className="CreatePalette_section">
