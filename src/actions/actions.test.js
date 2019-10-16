@@ -86,4 +86,16 @@ describe('actions', () => {
 
     expect(result).toEqual(expectedAction);
   });
+
+  it('should have a type of SET_PROJECT_ID', () => {
+    const mockId = 2;
+    const expectedAction = {
+      type: 'SET_PROJECT_ID',
+      id: 2
+    }
+
+    const result = actions.setCurrentProjectId(mockId);
+
+    expect(result).toEqual(expectedAction);
+  });
 });
