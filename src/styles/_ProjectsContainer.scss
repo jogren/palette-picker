@@ -21,6 +21,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: scroll;
+  height: 23vh;
 }
 
 .error {

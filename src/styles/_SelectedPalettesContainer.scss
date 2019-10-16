@@ -1,6 +1,8 @@
 .selectedPalettes_section {
   width: 100%;
   position: relative;
+  overflow: scroll;
+  height: 39vh;
 }
 
 .selected-palette header {
@@ -20,6 +22,7 @@
 .color-container div {
   width: 20%;
   height: 40px;
+  cursor: pointer;
 }
 
 .color-container:hover {

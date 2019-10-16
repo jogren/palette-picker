@@ -79,7 +79,7 @@ export class CreatePaletteForm extends Component {
     })
     return (
       <section className="CreatePalette_section">
-        {currentPaletteId && <div>
+        {currentPaletteId && <div className="div_selected-palette">
           <button onClick={this.handleSaveEdits}>{`Save Changes for ${currentPaletteId.name}`}</button>
           <button onClick={this.revertEdits}>Go Back</button>
         </div>}
@@ -94,7 +94,7 @@ export class CreatePaletteForm extends Component {
             name="name"
             value={this.state.name}
             onChange={this.handleChange} />
-          <button disabled={!this.state.name || !this.state.currentProject} onClick={this.handleSubmit}>Save Palette</button>
+          <button disabled={!this.state.name || !this.state.currentProject} onClick={this.handleSubmit}>Save</button>
         </form>}
       </section>
     )
