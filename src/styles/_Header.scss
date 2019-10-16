@@ -9,6 +9,7 @@
   position: absolute;
   right: 43.5%;
   top: 80%;
+  font-weight: 100;
 }
 
 h1 {
@@ -22,13 +23,12 @@ h1 {
   font-size: 1em;
   width: 200px;
   cursor: pointer;
+  background-color: #D3D3D3;
 }
 
 .generate-color-btn:hover{ 
   animation: Generate_New_Color 1s;
   animation-timing-function: linear;   
-  background-color: #FFFFFF;
-  color: #3e3b39;
 }
 
 @keyframes Generate_New_Color {

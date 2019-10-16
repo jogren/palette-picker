@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { postNewProject, getAllProjects, getSelectedPalettes, deleteProjectFromDB } from '../util/apiCalls';
-import { setCurrentProjects, setSelectedPalettes, hasErrored } from '../actions';
+import { setCurrentProjects, setSelectedPalettes, hasErrored, setCurrentProjectId } from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FiTrash2 } from 'react-icons/fi';
@@ -35,7 +35,9 @@ export class ProjectsContainer extends Component {
   }
 
   handleProjectSelect = async (id) => {
-    const { setSelectedPalettes, hasErrored } = this.props;
+    const { setSelectedPalettes, hasErrored, setCurrentProjectId } = this.props;
+    setCurrentProjectId(id);
+    this.setState({ currentProjectId: id })
     try {
       const palettes = await getSelectedPalettes(id);
       if (!palettes.length) {
@@ -49,21 +51,23 @@ export class ProjectsContainer extends Component {
   }
 
   deleteProject = async (id) => {
-    const { setCurrentProjects, hasErrored } = this.props;
+    const { setCurrentProjects, hasErrored, setSelectedPalettes } = this.props;
     try {
       await deleteProjectFromDB(id);
       const projects = await getAllProjects();
       setCurrentProjects(projects);
+      setSelectedPalettes([])
     } catch ({message}) {
       hasErrored(message)
     }
   }
 
   render() {
-    const { currentProjects } = this.props;
+    const { currentProjects, currentProjectId } = this.props;
     let projectList = currentProjects.map((project, index) => {
+      let projectClass = project.id === currentProjectId ? 'button_selected-Project' : 'project-name'
       return <div key={index}>
-          <button className="project-name" onClick={() => this.handleProjectSelect(project.id)}>{project.name}</button>
+        <button className={projectClass} onClick={() => this.handleProjectSelect(project.id)}>{project.name}</button>
         <button className="trash-btn" onClick={() => this.deleteProject(project.id)}><FiTrash2 className="trash-img-project" /></button>
         </div>
     })
@@ -72,10 +76,11 @@ export class ProjectsContainer extends Component {
         <form>
           <input 
             type="text"
-            placeholder="New Project's Name..."
+            placeholder="Enter Name..."
             name="name"
             value={this.state.name}
-            onChange={this.handleChange} />
+            onChange={this.handleChange} 
+            autoComplete="off"/>
           <button disabled={!this.state.name} onClick={this.handleSubmit}>Submit Project Name</button>
         </form>
         <div className="error">
@@ -89,11 +94,12 @@ export class ProjectsContainer extends Component {
   }
 }
 
-export const mapStateToProps = ({ currentProjects }) => ({
-  currentProjects
+export const mapStateToProps = ({ currentProjects, currentProjectId }) => ({
+  currentProjects,
+  currentProjectId
 })
 
 export const mapDispatchToProps = dispatch => (
-  bindActionCreators({ setCurrentProjects, setSelectedPalettes, hasErrored }, dispatch)
+  bindActionCreators({ setCurrentProjects, setSelectedPalettes, hasErrored, setCurrentProjectId }, dispatch)
 )
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);

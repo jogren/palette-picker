@@ -28,3 +28,8 @@ export const hasErrored = errorMsg => ({
   type: 'HAS_ERRORED',
   errorMsg
 });
+
+export const setCurrentProjectId = id => ({
+  type: 'SET_PROJECT_ID',
+  id
+});
