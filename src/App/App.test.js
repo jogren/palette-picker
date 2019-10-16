@@ -104,4 +104,48 @@ describe('App', () => {
     expect(mappedProps).toEqual(expected);
   });
 
+  it('it calls dispatch with the setCurrentPalette action', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = setCurrentPalette(currentPaletteMock);
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.setCurrentPalette(currentPaletteMock);
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+
+  it('it calls dispatch with the setCurrentProjects action', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = setCurrentProjects(currentProjectsMock);
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.setCurrentProjects(currentProjectsMock);
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+
+  it('it calls dispatch with the setSelectedPalettes action', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = setSelectedPalettes(selectedPalettesMock);
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.setSelectedPalettes(selectedPalettesMock);
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+
+  it('it calls dispatch with the setCurrentPaletteId action', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = setCurrentPaletteId(currentPaletteIdMock);
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.setCurrentPaletteId(currentPaletteIdMock);
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+
+  it('it calls dispatch with the hasErrored action', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = hasErrored("Error retrieving projects");
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.hasErrored("Error retrieving projects");
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
 });
