@@ -93,12 +93,12 @@ export class App extends Component {
   }
 }
 
-const mapStateToProps = ({ currentPalette, selectedPalettes }) => ({
+export const mapStateToProps = ({ currentPalette, selectedPalettes }) => ({
   currentPalette,
   selectedPalettes
 })
 
-const mapDispatchToProps = dispatch => (
+export const mapDispatchToProps = dispatch => (
   bindActionCreators({ setCurrentPalette, setCurrentProjects, setSelectedPalettes, setCurrentPaletteId, hasErrored }, dispatch)
 )
 
