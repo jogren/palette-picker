@@ -6,6 +6,7 @@ exports[`App should match the snapshot with the data passed through 1`] = `
 >
   <Header
     generateColors={[Function]}
+    lockMessage={true}
   />
   <Connect(CurrentColors)
     toggleLock={[Function]}

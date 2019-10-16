@@ -6,9 +6,10 @@ exports[`ProjectsContainer should match the snapshot with the data passed throug
 >
   <form>
     <input
+      autoComplete="off"
       name="name"
       onChange={[Function]}
-      placeholder="New Project's Name"
+      placeholder="Enter Name..."
       type="text"
       value=""
     />
