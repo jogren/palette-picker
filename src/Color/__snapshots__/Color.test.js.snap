@@ -13,6 +13,29 @@ exports[`Color should match the snapshot with the data passed through 1`] = `
   <button
     className="lock-btn"
   >
+    <FiLock />
+  </button>
+  <p
+    className="hex-name"
+  >
+    #FFFFFF
+  </p>
+</article>
+`;
+
+exports[`Color should match the snapshot with the data passed through 2`] = `
+<article
+  className="color"
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#FFFFFF",
+    }
+  }
+>
+  <button
+    className="lock-btn"
+  >
     <FiUnlock />
   </button>
   <p
