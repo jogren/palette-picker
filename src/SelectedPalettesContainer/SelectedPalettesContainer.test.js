@@ -5,6 +5,7 @@ import { SelectedPalettesContainer, mapStateToProps } from './SelectedPalettesCo
 describe('SelectedPalettesContainer', () => {
   let wrapper;
   const deletePaletteMock = jest.fn();
+  const editPaletteMock = jest.fn();
   const selectedPalettesMock = [{
     id: 21,
     name: 'palette',
@@ -44,6 +45,7 @@ describe('SelectedPalettesContainer', () => {
     wrapper = shallow(<SelectedPalettesContainer
       deletePalette={deletePaletteMock}
       selectedPalettes={selectedPalettesMock}
+      editPalette={editPaletteMock}
       />)
   });
 
@@ -59,5 +61,15 @@ describe('SelectedPalettesContainer', () => {
     const mappedProps = mapStateToProps(mockState);
 
     expect(mappedProps).toEqual(expected);
+  });
+
+  it('should call the editPalette method when the palette is clicked', () => {
+    wrapper.find('section').at(1).simulate('click');
+    expect(editPaletteMock).toHaveBeenCalled();
+  });
+
+  it('should call the deletePalette method when the trash image is clicked', () => {
+    wrapper.find('FiTrash2').simulate('click');
+    expect(deletePaletteMock).toHaveBeenCalled();
   });
 });
