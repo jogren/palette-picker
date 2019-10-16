@@ -11,6 +11,12 @@ import { getAllProjects, deletePaletteFromDB, getSelectedPalettes } from '../uti
 let randomColor = require('randomcolor');
 
 export class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      lockMessage: true
+    }
+  }
 
   componentDidMount = async () => {
     const { setCurrentProjects, hasErrored } = this.props;
@@ -42,6 +48,7 @@ export class App extends Component {
   }
 
   toggleLock = (toggleColor) => {
+    this.setState({ lockMessage: false })
     const { currentPalette, setCurrentPalette } = this.props;
     let updatedPalette = currentPalette.map(color => {
       if (color.hexCode === toggleColor) {
@@ -81,7 +88,7 @@ export class App extends Component {
   render() {
     return (
       <main className="App">
-        <Header generateColors={this.generateRandomColors}/>
+        <Header generateColors={this.generateRandomColors} lockMessage={this.state.lockMessage}/>
         <CurrentColors toggleLock={this.toggleLock}/>
         <CreatePaletteForm setRandomPalette={this.setRandomPalette}/>
         <section className="App_projects-section">

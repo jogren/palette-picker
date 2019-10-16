@@ -2,6 +2,13 @@
   display: flex;
   justify-content: space-between;
   padding: 15px 15px 0px 15px;
+  position: relative;
+}
+
+.Header_header p {
+  position: absolute;
+  right: 43.5%;
+  top: 80%;
 }
 
 h1 {
