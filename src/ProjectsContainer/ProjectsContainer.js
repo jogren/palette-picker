@@ -89,11 +89,11 @@ export class ProjectsContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ currentProjects }) => ({
+export const mapStateToProps = ({ currentProjects }) => ({
   currentProjects
 })
 
-const mapDispatchToProps = dispatch => (
+export const mapDispatchToProps = dispatch => (
   bindActionCreators({ setCurrentProjects, setSelectedPalettes, hasErrored }, dispatch)
 )
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);

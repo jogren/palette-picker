@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { CreatePaletteForm } from './CreatePaletteForm';
-import { postNewPalette, getSelectedPalettes, editPalette } from '../util/apiCalls';
+import { postNewPalette, getSelectedPalettes } from '../util/apiCalls';
 import { mapStateToProps, mapDispatchToProps } from './CreatePaletteForm';
 
 jest.mock('../util/apiCalls');
