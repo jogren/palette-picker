@@ -16,7 +16,7 @@ exports[`CreatePaletteForm should match the snapshot with the data passed throug
         Pick Project
       </option>
       <option
-        key="Winter"
+        key="Winter-0"
         value="Winter"
       >
         Winter
