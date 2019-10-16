@@ -42,7 +42,7 @@ export class CreatePaletteForm extends Component {
     } catch ({message}) {
       hasErrored(message)
     }
-    
+    this.props.setRandomPalette();
     this.setState({ name: "" })
   }
 
@@ -90,7 +90,7 @@ export class CreatePaletteForm extends Component {
           </select>
           <input
             type="text"
-            placeholder="Palette Name"
+            placeholder="Palette Name..."
             name="name"
             value={this.state.name}
             onChange={this.handleChange} />
