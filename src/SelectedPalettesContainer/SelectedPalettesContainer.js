@@ -24,7 +24,7 @@ export const SelectedPalettesContainer = ({ selectedPalettes, deletePalette, edi
   return (
     <section className="selectedPalettes_section">
       { selectedPalettesDisplay }
-      {!selectedPalettes.length && <p>Please select a project to view</p> }
+      {!selectedPalettes.length && <p className="no-selected-palettes">Please select a project or add some palettes</p> }
     </section>
   )
 }
