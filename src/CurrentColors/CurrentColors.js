@@ -15,7 +15,7 @@ export const CurrentColors = ({ currentPalette, toggleLock }) => {
   );
 }
 
-const mapStateToProps = ({ currentPalette }) => ({
+export const mapStateToProps = ({ currentPalette }) => ({
   currentPalette
 })
 
