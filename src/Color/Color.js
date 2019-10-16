@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiLock, FiUnlock } from "react-icons/fi";
+import { FiLock, FiUnlock } from 'react-icons/fi';
 
 
 const Color = ({ color, isLocked, toggleLock }) => {

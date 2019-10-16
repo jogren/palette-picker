@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import deleteIcon from '../images/delete.png';
-
+import { FiTrash2 } from 'react-icons/fi';
 
 export const SelectedPalettesContainer = ({ selectedPalettes, deletePalette, editPalette }) => {
 
@@ -9,7 +9,7 @@ export const SelectedPalettesContainer = ({ selectedPalettes, deletePalette, edi
       return <div className="selected-palette" key={palette.name}>
         <header>
           <p>{palette.name}</p>
-          <img onClick={() => deletePalette(palette.id, palette.project_id)} src={deleteIcon} alt={palette.name} className="img_color-container"/>
+          <FiTrash2 className="trash-img" onClick={() => deletePalette(palette.id, palette.project_id)} src={deleteIcon} alt={palette.name}/>
         </header>
         <section className="color-container" onClick={() => editPalette(palette.id)}>
           <div style={{ backgroundColor: palette.color1 }}></div>

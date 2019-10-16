@@ -3,6 +3,7 @@ import { postNewProject, getAllProjects, getSelectedPalettes, deleteProjectFromD
 import { setCurrentProjects, setSelectedPalettes, hasErrored } from '../actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { FiTrash2 } from 'react-icons/fi';
 
 export class ProjectsContainer extends Component {
   constructor() {
@@ -63,7 +64,7 @@ export class ProjectsContainer extends Component {
     let projectList = currentProjects.map((project, index) => {
       return <div key={index}>
           <button className="project-name" onClick={() => this.handleProjectSelect(project.id)}>{project.name}</button>
-          <button onClick={() => this.deleteProject(project.id)}>x</button>
+        <button className="trash-btn" onClick={() => this.deleteProject(project.id)}><FiTrash2 className="trash-img-project" /></button>
         </div>
     })
     return (
@@ -77,7 +78,9 @@ export class ProjectsContainer extends Component {
             onChange={this.handleChange} />
           <button disabled={!this.state.name} onClick={this.handleSubmit}>Submit Project Name</button>
         </form>
-        {this.state.hasErrored && <p>{this.state.hasErrored}</p>}
+        <div className="error">
+        {this.state.hasErrored && <p className="error-text">{this.state.hasErrored}</p>}
+        </div>
         <div className="div_project-name-container">
           {projectList}
         </div>
