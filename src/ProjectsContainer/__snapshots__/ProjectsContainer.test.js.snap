@@ -20,6 +20,9 @@ exports[`ProjectsContainer should match the snapshot with the data passed throug
     </button>
   </form>
   <div
+    className="error"
+  />
+  <div
     className="div_project-name-container"
   >
     <div
@@ -32,9 +35,12 @@ exports[`ProjectsContainer should match the snapshot with the data passed throug
         Winter
       </button>
       <button
+        className="trash-btn"
         onClick={[Function]}
       >
-        x
+        <FiTrash2
+          className="trash-img-project"
+        />
       </button>
     </div>
   </div>

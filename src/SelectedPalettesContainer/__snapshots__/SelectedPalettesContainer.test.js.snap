@@ -12,9 +12,9 @@ exports[`SelectedPalettesContainer should match the snapshot with the data passe
       <p>
         palette
       </p>
-      <img
+      <FiTrash2
         alt="palette"
-        className="img_color-container"
+        className="trash-img"
         onClick={[Function]}
         src="delete.png"
       />
