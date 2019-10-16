@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header should match the snapshot with the data passed through 1`] = `
-<header>
+<header
+  className="Header_header"
+>
   <h1>
     Palette Picker
   </h1>

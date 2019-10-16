@@ -23,9 +23,10 @@ exports[`CreatePaletteForm should match the snapshot with the data passed throug
       </option>
     </select>
     <input
+      autoComplete="off"
       name="name"
       onChange={[Function]}
-      placeholder="Palette Name"
+      placeholder="Palette Name..."
       type="text"
       value=""
     />
@@ -33,7 +34,7 @@ exports[`CreatePaletteForm should match the snapshot with the data passed throug
       disabled={true}
       onClick={[Function]}
     >
-      Save Palette
+      Save
     </button>
   </form>
 </section>
