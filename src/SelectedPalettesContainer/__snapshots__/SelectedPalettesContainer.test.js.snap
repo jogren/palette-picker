@@ -67,8 +67,10 @@ exports[`SelectedPalettesContainer should match the snapshot with the data passe
 <section
   className="selectedPalettes_section"
 >
-  <p>
-    Please select a project to view
+  <p
+    className="no-selected-palettes"
+  >
+    Please select a project or add some palettes
   </p>
 </section>
 `;
