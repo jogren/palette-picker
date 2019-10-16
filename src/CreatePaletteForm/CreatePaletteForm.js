@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { postNewPalette, getSelectedPalettes, editPalette } from '../util/apiCalls';
-import { setSelectedPalettes, clearSelectedPaletteId, hasErrored } from '../actions';
+import { setSelectedPalettes, clearSelectedPaletteId, hasErrored, setCurrentProjectId } from '../actions';
 import { bindActionCreators } from 'redux';
 
 export class CreatePaletteForm extends Component {
@@ -23,7 +23,7 @@ export class CreatePaletteForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { currentProjects, currentPalette, setSelectedPalettes, hasErrored} = this.props;
+    const { currentProjects, currentPalette, setSelectedPalettes, hasErrored, setCurrentProjectId} = this.props;
     const { name, currentProject } = this.state;
     const projectId = currentProjects.find(project => project.name === currentProject).id;
     const postPalette = {
@@ -38,12 +38,13 @@ export class CreatePaletteForm extends Component {
     try {
       await postNewPalette(postPalette);
       const updatePalettes = await getSelectedPalettes(projectId);
+      setCurrentProjectId(projectId);
       setSelectedPalettes(updatePalettes);
     } catch ({message}) {
-      hasErrored(message)
+      hasErrored(message);
     }
     this.props.setRandomPalette();
-    this.setState({ name: "" })
+    this.setState({ name: "" });
   }
 
   handleSaveEdits = async () => {
@@ -93,7 +94,8 @@ export class CreatePaletteForm extends Component {
             placeholder="Palette Name..."
             name="name"
             value={this.state.name}
-            onChange={this.handleChange} />
+            onChange={this.handleChange} 
+            autoComplete="off"/>
           <button disabled={!this.state.name || !this.state.currentProject} onClick={this.handleSubmit}>Save</button>
         </form>}
       </section>
@@ -108,7 +110,7 @@ export const mapStateToProps = ({ currentProjects, currentPalette, currentPalett
 });
 
 export const mapDispatchToProps = dispatch => (
-  bindActionCreators({ setSelectedPalettes, clearSelectedPaletteId, hasErrored }, dispatch)
+  bindActionCreators({ setSelectedPalettes, clearSelectedPaletteId, hasErrored, setCurrentProjectId }, dispatch)
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePaletteForm);
