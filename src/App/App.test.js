@@ -148,4 +148,14 @@ describe('App', () => {
 
     expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });
+
+  it('should call deletePaletteFromDB when deletePalette is called', async () => {
+    wrapper.instance().deletePalette(1, 1);
+    expect(deletePaletteFromDB).toHaveBeenCalled();
+  });
+
+  it('should call getSelectedPalettes when deletePalette is called', async () => {
+    wrapper.instance().deletePalette(1, 1);
+    expect(getSelectedPalettes).toHaveBeenCalled();
+  });
 });
