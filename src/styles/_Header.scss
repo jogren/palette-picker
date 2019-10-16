@@ -1,4 +1,4 @@
-header {
+.Header_header {
   display: flex;
   justify-content: space-between;
   padding: 15px 15px 0px 15px;
@@ -19,6 +19,8 @@ h1 {
 .generate-color-btn:hover{ 
   animation: Generate_New_Color 1s;
   animation-timing-function: linear;   
+  background-color: #FFFFFF;
+  color: #3e3b39;
 }
 
 @keyframes Generate_New_Color {

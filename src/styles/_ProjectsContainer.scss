@@ -1,6 +1,7 @@
 .ProjectsContainer_section {
   padding: 15px;
   width: 35%;
+  margin-top: -3%;
 }
 
 .ProjectsContainer_section form {
@@ -17,12 +18,16 @@
   padding: 5px;
 }
 
+.ProjectsContainer_section input {
+  height: 24px;
+}
+
 .div_project-name-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: scroll;
-  height: 23vh;
+  height: 26vh;
 }
 
 .error {

@@ -2,7 +2,8 @@
   width: 100%;
   position: relative;
   overflow: scroll;
-  height: 39vh;
+  height: 37vh;
+  padding: 10px;
 }
 
 .selected-palette header {
@@ -31,10 +32,11 @@
 }
 
 .trash-img {
-  color: $secondary;
+  color: #fff;
   cursor: pointer;
-  height: 2em;
-  width: 2em;
+  height: 1.5em;
+  width: 1.5em;
+  margin: 5px;
 }
 
 .no-selected-palettes {
