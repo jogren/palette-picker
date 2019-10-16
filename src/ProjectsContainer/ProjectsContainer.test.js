@@ -116,3 +116,26 @@ describe('mapDispatchToProps', () => {
     expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
   });
 })
+
+describe('mapStateToProps', () => {
+  it('should return an array with the currentProjects', () => {
+    // Setup
+    const mockState = {
+      currentProjects: [{ name: 'Project 1', id: 1 }],
+      currentPalette: ['color1', 'color2', 'color3', 'color4', 'color5'],
+      selectedPalettes: ['selectedPalettes'],
+      currentPaletteId: null,
+      errorMsg: "",
+      
+    };
+    const expected = {
+      currentProjects: [{ name: 'Project 1', id: 1 }],
+    };
+
+    // Execution
+    const mappedProps = mapStateToProps(mockState);
+
+    // Expectation
+    expect(mappedProps).toEqual(expected);
+  });
+});
