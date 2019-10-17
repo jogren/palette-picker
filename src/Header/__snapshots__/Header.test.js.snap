@@ -7,6 +7,9 @@ exports[`Header should match the snapshot with the data passed through 1`] = `
   <h1>
     Palette Picker
   </h1>
+  <p>
+    Click on a color to lock...
+  </p>
   <button
     className="generate-color-btn"
     onClick={[MockFunction]}
