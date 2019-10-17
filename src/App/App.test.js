@@ -83,7 +83,7 @@ describe('App', () => {
       setCurrentProjects={setCurrentProjectsMock}
       currentPalette={currentPaletteMock}
       selectedPalettes={selectedPalettesMock}
-      setSelectePalettes={setSelectedPalettesMock}
+      setSelectedPalettes={setSelectedPalettesMock}
       setCurrentPaletteId={setCurrentPaletteIdMock}
       hasErrored={hasErroredMock} 
       />)
@@ -92,6 +92,39 @@ describe('App', () => {
   it('should match the snapshot with the data passed through', () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should call setCurrentPalette when toggleLock is called', () => {
+    expect(wrapper.state('lockMessage')).toEqual(true);
+
+    wrapper.instance().toggleLock("#82ea46");
+    
+    expect(wrapper.state('lockMessage')).toEqual(false)
+    expect(setCurrentPaletteMock).toHaveBeenCalled();
+  })
+
+  it('should call deletePaletteFromDB, getSelectedPalettes and setSelectedPalettes when deletePalette', async () => {
+    wrapper.instance().deletePalette(1, 1);
+    await expect(deletePaletteFromDB).toHaveBeenCalled();
+    await expect(getSelectedPalettes).toHaveBeenCalled();
+    expect(setSelectedPalettesMock).toHaveBeenCalled();
+  })
+
+  it('should call hasErrored when the promise is rejected', async () => {
+    deletePaletteFromDB.mockImplementation(() => {
+      throw Error('new error')
+    })
+    await wrapper.instance().deletePalette(1, 2);
+
+    expect(hasErroredMock).toHaveBeenCalled();
+  })
+
+
+  it('should call setCurrentPaletteId and setCurrentPalette when editPalette is called', () => {
+    wrapper.instance().editPalette(49);
+
+    expect(setCurrentPaletteIdMock).toHaveBeenCalled();
+    expect(setCurrentPaletteMock).toHaveBeenCalled();
+  })
 
   it('mapStateToProps should grab the props it needs', () => {
     const expected = {
