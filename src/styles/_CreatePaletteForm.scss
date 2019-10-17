@@ -13,11 +13,12 @@ select {
   color: $secondary;
 }
 
-.CreatePalette_form button:hover,
+.CreatePalette_form button:enabled:hover,
 select:hover,
 .div_selected-palette button:hover {
   background-color: $secondary;
   color: #3e3b39;
+  cursor: pointer;
 }
 
 .CreatePalette_form input {
