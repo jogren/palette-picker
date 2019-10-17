@@ -51,11 +51,32 @@ describe('ProjectsContainer', () => {
     expect(wrapper.state('name')).toEqual("");
   });
 
-  it('should call getSelectedPalettes when handleProjectSelect is invoked and promise rejects', async () => {
+  it('should update state if promise rejects after handleSubmit call', async () => {
+    const mockEvent = { preventDefault: jest.fn() }
+
+    postNewProject.mockImplementation(() => {
+      throw Error('new error')
+    })
+    await wrapper.instance().handleSubmit(mockEvent);
+
+    expect(wrapper.state('name')).toEqual("");
+    expect(wrapper.state('hasErrored')).toEqual("new error");
+  });
+
+  it('should call getSelectedPalettes when handleProjectSelect is invoked and promise resolves', async () => {
     wrapper.instance().handleProjectSelect(3);
 
     expect(setCurrentProjectIdMock).toHaveBeenCalledWith(3);
     await expect(getSelectedPalettes).toHaveBeenCalledWith(3);
+  });
+
+  it('should call hasErrored when handleProjectSelect is called and a promise rejects', async () => {
+    getSelectedPalettes.mockImplementation(() => {
+      throw Error('new error')
+    })
+    await wrapper.instance().handleProjectSelect(1);
+
+    expect(hasErroredMock).toHaveBeenCalledWith('new error')
   });
 
   it('should invoke deleteProjectFromDB, getAllProjects and setCurrentProjects when deleteProject is invoked', async () => {
