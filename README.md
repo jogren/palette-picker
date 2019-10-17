@@ -1,4 +1,4 @@
-# palette-picker
+# Palette Picker
 
 [![Build Status](https://travis-ci.org/jogren/palette-picker.svg?branch=master)](https://travis-ci.org/jogren/palette-picker)
 
@@ -40,4 +40,4 @@ The app is deployed at: https://palette-picker-sfjo.herokuapp.com.
 
 ## Wireframe
 
-<img width="556" alt="Screen Shot 2019-10-16 at 5 55 24 PM" src="https://user-images.githubusercontent.com/19739235/66967461-3fc4a000-f03e-11e9-85ed-50e63325932f.png">
+<img width="418" alt="Screen Shot 2019-10-16 at 6 25 34 PM" src="https://user-images.githubusercontent.com/19739235/66968431-68e72f80-f042-11e9-8bb7-d8a16743d727.png">
