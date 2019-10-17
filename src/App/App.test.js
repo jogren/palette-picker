@@ -93,13 +93,28 @@ describe('App', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should call setCurrentPalette when toggleLock is called', () => {
+  it('should call setCurrentPalette updated new object when toggleLock is called', () => {
     expect(wrapper.state('lockMessage')).toEqual(true);
 
-    wrapper.instance().toggleLock("#82ea46");
+    wrapper.instance().toggleLock("#25b25d");
     
     expect(wrapper.state('lockMessage')).toEqual(false)
-    expect(setCurrentPaletteMock).toHaveBeenCalled();
+    expect(setCurrentPaletteMock).toHaveBeenCalledWith([{
+      hexCode: "#25b25d",
+      isLocked: true
+    }]);
+  })
+
+  it('should call setCurrentPalette with color when toggleLock', () => {
+    expect(wrapper.state('lockMessage')).toEqual(true);
+
+    wrapper.instance().toggleLock("#FFFFFF");
+
+    expect(wrapper.state('lockMessage')).toEqual(false)
+    expect(setCurrentPaletteMock).toHaveBeenCalledWith([{
+      hexCode: "#25b25d",
+      isLocked: false
+    }]);
   })
 
   it('should call deletePaletteFromDB, getSelectedPalettes and setSelectedPalettes when deletePalette', async () => {
