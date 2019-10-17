@@ -27,12 +27,17 @@
   padding: 2px;
 }
 
+.ProjectsContainer_section form button:enabled:hover {
+  background-color: $secondary;
+  cursor: pointer;
+}
+
 .ProjectsContainer_section input {
   height: 24px;
 }
 
 .ProjectsContainer_section form button {
-  background-color: #D3D3D3;
+  background-color: #d3d3d3;
 }
 
 .div_project-name-container {
